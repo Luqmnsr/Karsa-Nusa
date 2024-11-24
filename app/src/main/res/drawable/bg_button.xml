@@ -2,14 +2,14 @@
     <item android:state_pressed="true">
         <shape>
             <solid android:color="@color/button_auth_500" />
-            <corners android:radius="9dp" />
+            <corners android:radius="20dp" />
             <padding android:left="4dp" android:right="4dp" />
         </shape>
     </item>
     <item>
         <shape>
             <solid android:color="@color/button_auth_500" />
-            <corners android:radius="9dp" />
+            <corners android:radius="20dp" />
             <padding android:left="4dp" android:right="4dp" />
         </shape>
     </item>
