@@ -75,38 +75,49 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/profile_button_account"
+        android:id="@+id/buttonProfileTheme"
         style="@style/Widget.Material3.Button.TextButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:gravity="start|center_vertical"
-        android:text="@string/button_account"
+        android:text="@string/button_theme"
+        android:textSize="18sp"
+        android:fontFamily="@font/poppins_bold"
+        android:drawableLeft="@drawable/ic_theme"
         app:layout_constraintEnd_toEndOf="@+id/profile_image_container"
         app:layout_constraintStart_toStartOf="@+id/profile_image_container"
         app:layout_constraintTop_toBottomOf="@+id/profile_image_container" />
 
     <Button
-        android:id="@+id/profile_button_privacy"
+        android:id="@+id/buttonProfileLanguange"
         style="@style/Widget.Material3.Button.TextButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:gravity="start|center_vertical"
-        android:text="@string/button_privacy"
-        app:layout_constraintEnd_toEndOf="@+id/profile_button_account"
+        android:text="@string/button_languange"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/ic_languange"
+        app:layout_constraintEnd_toEndOf="@+id/profile_image_container"
         app:layout_constraintStart_toStartOf="@+id/profile_image_container"
-        app:layout_constraintTop_toBottomOf="@+id/profile_button_account" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonProfileTheme" />
 
     <Button
-        android:id="@+id/profile_button_help"
+        android:id="@+id/buttonProfileSignOut"
         style="@style/Widget.Material3.Button.TextButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:gravity="start|center_vertical"
-        android:text="@string/button_help"
-        app:layout_constraintEnd_toEndOf="@+id/profile_button_account"
+        android:text="@string/button_signout"
+        android:textSize="18sp"
+        android:fontFamily="@font/poppins_bold"
+        android:drawableLeft="@drawable/ic_logout"
+        app:layout_constraintEnd_toEndOf="@+id/profile_image_container"
         app:layout_constraintStart_toStartOf="@+id/profile_image_container"
-        app:layout_constraintTop_toBottomOf="@+id/profile_button_privacy" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonProfileLanguange" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

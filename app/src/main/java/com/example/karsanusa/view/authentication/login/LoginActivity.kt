@@ -29,12 +29,12 @@ import com.example.karsanusa.data.preference.UserModel
 import com.example.karsanusa.databinding.ActivityLoginBinding
 import com.example.karsanusa.view.activity.MainActivity
 import com.example.karsanusa.view.authentication.register.RegisterActivity
-import com.example.karsanusa.view.vmfactory.ViewModelFactory
+import com.example.karsanusa.view.vmfactory.SessionViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val loginViewModel by viewModels<LoginViewModel> {
-        ViewModelFactory.getInstance(application)
+        SessionViewModelFactory.getInstance(application)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

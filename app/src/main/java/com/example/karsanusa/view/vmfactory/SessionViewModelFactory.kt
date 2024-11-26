@@ -7,7 +7,9 @@ import com.example.karsanusa.data.di.Injection
 import com.example.karsanusa.data.repository.UserRepository
 import com.example.karsanusa.view.authentication.login.LoginViewModel
 
-class ViewModelFactory(private val repository: UserRepository) : ViewModelProvider.NewInstanceFactory() {
+class SessionViewModelFactory(
+    private val repository: UserRepository
+) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -21,15 +23,15 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
 
     companion object {
         @Volatile
-        private var INSTANCE: ViewModelFactory? = null
+        private var INSTANCE: SessionViewModelFactory? = null
         @JvmStatic
-        fun getInstance(context: Context): ViewModelFactory {
+        fun getInstance(context: Context): SessionViewModelFactory {
             if (INSTANCE == null) {
-                synchronized(ViewModelFactory::class.java) {
-                    INSTANCE = ViewModelFactory(Injection.provideRepository(context))
+                synchronized(SessionViewModelFactory::class.java) {
+                    INSTANCE = SessionViewModelFactory(Injection.provideRepository(context))
                 }
             }
-            return INSTANCE as ViewModelFactory
+            return INSTANCE as SessionViewModelFactory
         }
     }
 }

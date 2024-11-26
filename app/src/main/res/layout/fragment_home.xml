@@ -58,12 +58,12 @@
                 android:id="@+id/tvFeature"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 android:layout_marginStart="4dp"
-                android:text="Feature"
-                android:textSize="20sp"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/poppins_bold"
-                android:padding="8dp"/>
+                android:padding="8dp"
+                android:text="Feature"
+                android:textSize="20sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -172,7 +172,7 @@
                 android:orientation="horizontal"
                 tools:listitem="@layout/item_news" />
 
-            <!-- Upcoming Events Title -->
+            <!-- News Title -->
             <TextView
                 android:id="@+id/tvNews"
                 android:layout_width="match_parent"
@@ -183,13 +183,13 @@
                 android:padding="8dp" />
 
             <ProgressBar
-                android:id="@+id/progressBarFinished"
+                android:id="@+id/progressBarNews"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:visibility="gone" />
 
-            <!-- RecyclerView for Finished Events (Vertical) -->
+            <!-- RecyclerView for News (Vertical) -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvNews"
                 android:layout_width="match_parent"
