@@ -111,7 +111,6 @@
             motion:layout_constraintEnd_toStartOf="@+id/menu2"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginStart="32dp"
             motion:layout_constraintHorizontal_bias="0.5"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintBottom_toBottomOf="parent"
@@ -228,7 +227,9 @@
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            motion:layout_constraintTop_toBottomOf="@id/descMenu3"
             motion:layout_constraintBottom_toTopOf="@+id/menu3"
             android:alpha="1"
             motion:layout_constraintStart_toStartOf="parent" />

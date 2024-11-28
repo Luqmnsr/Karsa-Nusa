@@ -22,7 +22,8 @@
     <string name="title_login">Masuk</string>
     <string name="title_login_page">Masuk Sekarang</string>
     <string name="message_login_page">Masukkan Email dan Kata Sandi Anda</string>
-    <string name="hypertext">Belum punya akun ? Daftar Sekarang</string>
+    <string name="hypertext">Belum punya akun ? </string>
+    <string name="hypertext_spanned">Daftar Sekarang</string>
 
     <!-- Hint Auth -->
     <string name="hint_name">Masukkan Nama Anda</string>

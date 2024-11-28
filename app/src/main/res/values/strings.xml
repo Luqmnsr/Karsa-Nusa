@@ -1,85 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Karsa Nusa</string>
 
-    <string name="title_welcome">Selamat datang, {user} di KarsaNusa</string>
-    <string name="title_community">Komunitas</string>
-    <string name="title_profile">Profil</string>
-    <string name="title_home">Beranda</string>
+    <string name="title_welcome">Welcome, {user} to KarsaNusa</string>
+    <string name="title_community">Community</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_home">Home</string>
 
     <!-- Text Register -->
-    <string name="title_register">Daftar</string>
-    <string name="title_register_page">Buat Akun</string>
-    <string name="message_register_page">Beritahu Kami Tentang Dirimu</string>
-    <string name="name">Nama</string>
+    <string name="title_register">Register</string>
+    <string name="title_register_page">Create Account</string>
+    <string name="message_register_page">Tell Us About Yourself</string>
+    <string name="name">Name</string>
     <string name="email">Email</string>
-    <string name="password">Kata Sandi</string>
-    <string name="re_password">Konfirmasi Kata Sandi</string>
+    <string name="password">Password</string>
+    <string name="re_password">Confirm Password</string>
 
     <!-- Password -->
-    <string name="password_error_message">Password harus terdiri dari minimal 8 karakter</string>
+    <string name="password_error_message">Password must be at least 8 characters</string>
 
     <!-- Text Login -->
-    <string name="title_login">Masuk</string>
-    <string name="title_login_page">Masuk Sekarang</string>
-    <string name="message_login_page">Masukkan Email dan Kata Sandi Anda</string>
-    <string name="hypertext">Belum punya akun ? Daftar Sekarang</string>
+    <string name="title_login">Login</string>
+    <string name="title_login_page">Log In Now</string>
+    <string name="message_login_page">Enter Your Email and Password</string>
+    <string name="hypertext">Don\'t have an account? </string>
+    <string name="hypertext_spanned">Register Now</string>
 
     <!-- Hint Auth -->
-    <string name="hint_name">Masukkan Nama Anda</string>
-    <string name="hint_email">Masukkan Email Anda</string>
-    <string name="hint_password">Masukkan Kata Sandi Anda</string>
-    <string name="hint_re_password">Masukkan Ulang Kata Sandi Anda</string>
+    <string name="hint_name">Enter Your Name</string>
+    <string name="hint_email">Enter Your Email</string>
+    <string name="hint_password">Enter Your Password</string>
+    <string name="hint_re_password">Re-enter Your Password</string>
 
     <!-- Button Auth -->
-    <string name="button_login_text_enabled">Masuk</string>
-    <string name="button_login_text_disabled">Masuk</string>
-    <string name="button_register_text_enabled">Daftar</string>
-    <string name="button_register_text_disabled">Daftar</string>
+    <string name="button_login_text_enabled">Log In</string>
+    <string name="button_login_text_disabled">Log In</string>
+    <string name="button_register_text_enabled">Register</string>
+    <string name="button_register_text_disabled">Register</string>
 
     <!-- Dialog Login-->
     <string name="login_success_title">Yeah!</string>
-    <string name="login_success_message">Anda berhasil masuk %1$s. Tidak sabar untuk mengupload cerita, ya?</string>
-    <string name="login_success_positive_button">Lanjut</string>
+    <string name="login_success_message">You successfully logged in as %1$s. Can\'t wait to upload your story, right?</string>
+    <string name="login_success_positive_button">Continue</string>
     <string name="login_error_title">Oops!</string>
-    <string name="login_error_message_email_used">Email/password untuk %1$s salah!. Silakan ulangi kembali.</string>
-    <string name="login_error_positive_button">Coba Lagi</string>
+    <string name="login_error_message_email_used">The email/password for %1$s is incorrect! Please try again.</string>
+    <string name="login_error_positive_button">Try Again</string>
 
     <!-- Dialog Register -->
     <string name="register_success_title">Yeah!</string>
-    <string name="register_success_message">Akun dengan email %1$s sudah jadi nih. Yuk, login ke dalam aplikasinya.</string>
-    <string name="register_success_positive_button">Lanjut</string>
+    <string name="register_success_message">An account with the email %1$s is now ready. Let\'s log in to the app.</string>
+    <string name="register_success_positive_button">Continue</string>
     <string name="register_error_title">Oops!</string>
-    <string name="register_error_message_email_used">Email %1$s sudah digunakan. Silakan coba dengan email lain.</string>
-    <string name="register_error_positive_button">Coba Lagi</string>
-    <string name="empty_field_error">Harap isi semua kolom</string>
+    <string name="register_error_message_email_used">The email %1$s is already in use. Please try another email.</string>
+    <string name="register_error_positive_button">Try Again</string>
+    <string name="empty_field_error">Please fill in all fields</string>
 
-
-    <string name="button_show_all">Tampilkan lebih</string>
-    <string name="button_signout">Keluar</string>
-    <string name="button_theme">Tema</string>
-    <string name="button_languange">Bahasa</string>
+    <string name="button_show_all">Show More</string>
+    <string name="button_signout">Sign Out</string>
+    <string name="button_theme">Theme</string>
+    <string name="button_languange">Language</string>
     <string name="button_shopee">Shopee</string>
     <string name="button_tokopedia">Tokopedia</string>
 
-    <string name="hint_search">Ketik kata kunci</string>
+    <string name="hint_search">Type a keyword</string>
 
-    <string name="content_description_item_carousel_image">Ini adalah gambar item carousel</string>
-    <string name="content_description_fragment_profile_image">Ini adalah foto profil</string>
+    <string name="content_description_item_carousel_image">This is a carousel item image</string>
+    <string name="content_description_fragment_profile_image">This is the profile picture</string>
 
-    <string name="text_scan">Hasil jepretan</string>
-    <string name="text_result">Hasil deteksi</string>
-    <string name="text_description">Deskripsi</string>
-    <string name="label">label\n</string>
+    <string name="text_scan">Snapshot Result</string>
+    <string name="text_result">Detection Result</string>
+    <string name="text_description">Description</string>
+    <string name="label">Label\n</string>
     <string name="hint_username">Name\n</string>
 
     <!-- Welcome -->
-    <string name="title_menu_1">Selamat Datang!</string>
-    <string name="desc_menu_1">Aplikasi kami adalah platform untuk menemukan dan menjelajahi warisan budaya yang kaya dari berbagai daerah di seluruh Indonesia.</string>
-    <string name="title_menu_2">Tentang Kami</string>
-    <string name="desc_menu_2">Warisan diciptakan dengan tujuan untuk mempromosikan wisata warisan budaya dan menyediakan wadah bagi masyarakat untuk terhubung dengan akar mereka.</string>
-    <string name="title_menu_3">Mulai</string>
-    <string name="desc_menu_3">Mari Kita Mulai! Sekarang setelah Anda mempelajari lebih banyak tentang kami, mari kita mulai perjalanan Anda melalui warisan budaya.</string>
-    <string name="begin">Mulai</string>
+    <string name="title_menu_1">Welcome!</string>
+    <string name="desc_menu_1">Our app is a platform to discover and explore the rich cultural heritage from various regions across Indonesia.</string>
+    <string name="title_menu_2">About Us</string>
+    <string name="desc_menu_2">Heritage was created to promote cultural tourism and provide a platform for people to connect with their roots.</string>
+    <string name="title_menu_3">Get Started</string>
+    <string name="desc_menu_3">Let’s Get Started! Now that you know more about us, let’s begin your journey through cultural heritage.</string>
+    <string name="begin">Start</string>
     <string name="logout">Logout\n</string>
 
     <integer-array name="carousel_images">
