@@ -188,9 +188,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setupHyperText() {
-        val fullText = getString(R.string.hypertext) // "Belum punya akun? Daftar Sekarang"
-        val startIndex = fullText.indexOf("Daftar Sekarang")
-        val endIndex = startIndex + "Daftar Sekarang".length
+        val spannableTextA = getString(R.string.hypertext)
+        val spannableTextB = getString(R.string.hypertext_spanned)
+        val fullText = spannableTextA + spannableTextB // "Belum punya akun? Daftar Sekarang"
+        val startIndex = fullText.indexOf(spannableTextB)
+        val endIndex = startIndex + spannableTextB.length
 
         val spannableString = SpannableString(fullText)
 
