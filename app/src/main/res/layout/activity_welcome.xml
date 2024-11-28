@@ -130,7 +130,6 @@
         android:id="@+id/menu1"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginStart="32dp"
         app:altSrc="@drawable/ic_circle_full"
         app:layout_constraintEnd_toStartOf="@+id/menu2"
         app:layout_constraintHorizontal_bias="0.5"
