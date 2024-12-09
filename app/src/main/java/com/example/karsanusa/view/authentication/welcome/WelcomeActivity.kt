@@ -6,12 +6,16 @@ import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.asLiveData
+import com.example.karsanusa.data.preference.UserPreference
+import com.example.karsanusa.data.preference.dataStore
 import com.example.karsanusa.databinding.ActivityWelcomeBinding
+import com.example.karsanusa.view.activity.MainActivity
 import com.example.karsanusa.view.authentication.login.LoginActivity
 
 class WelcomeActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityWelcomeBinding
+    private lateinit var userPreference: UserPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,8 +23,11 @@ class WelcomeActivity : AppCompatActivity() {
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        userPreference = UserPreference.getInstance(this.dataStore)
+
         setupView()
         setupAction()
+        validateUser()
     }
 
     private fun setupView() {
@@ -43,5 +50,15 @@ class WelcomeActivity : AppCompatActivity() {
         }
     }
 
+    private fun validateUser() {
+        userPreference.getSession().asLiveData().observe(this) { result ->
+            if (result.isLogin) {
+                val intent = Intent(this@WelcomeActivity, MainActivity::class.java)
 
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finish()
+            }
+        }
+    }
 }

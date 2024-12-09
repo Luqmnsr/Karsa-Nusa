@@ -3,6 +3,7 @@ package com.example.karsanusa.view.authentication.register
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
@@ -19,21 +20,24 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.karsanusa.R
 import com.example.karsanusa.data.preference.UserModel
 import com.example.karsanusa.databinding.ActivityRegisterBinding
 import com.example.karsanusa.view.activity.MainActivity
+import com.example.karsanusa.view.vmfactory.RegisterViewModelFactory
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
-//    private val registerViewModel by viewModels<RegisterViewModel> {
-//        ViewModelFactory.getInstance(application)
-//    }
+    private lateinit var userViewModel: RegisterViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val viewModelFactory = RegisterViewModelFactory.getInstance(this)
+        userViewModel = ViewModelProvider(this, viewModelFactory)[RegisterViewModel::class.java]
 
         setupView()
         setupAction()
@@ -75,6 +79,18 @@ class RegisterActivity : AppCompatActivity() {
                 setTitle("Yeah!")
                 setMessage("Akun dengan $email sudah jadi nih. Yuk, login dan belajar coding.")
                 setPositiveButton("Lanjut") { _, _ ->
+                    userViewModel.saveSession(
+                        UserModel(
+                            binding.emailEditText.text.toString(),
+                            binding.nameEditText.text.toString(),
+                            true
+                        )
+                    )
+
+                    val intent = Intent(this@RegisterActivity, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+
+                    startActivity(intent)
                     finish()
                 }
                 create()
