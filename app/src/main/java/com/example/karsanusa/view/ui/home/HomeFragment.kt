@@ -7,12 +7,12 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.karsanusa.BuildConfig
 import com.example.karsanusa.R
@@ -23,7 +23,7 @@ import com.example.karsanusa.view.authentication.login.LoginActivity
 import com.example.karsanusa.view.authentication.welcome.WelcomeActivity
 import com.google.android.material.carousel.CarouselLayoutManager
 import com.google.android.material.carousel.CarouselSnapHelper
-import com.google.android.material.carousel.HeroCarouselStrategy
+import com.google.android.material.carousel.FullScreenCarouselStrategy
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -61,7 +61,7 @@ class HomeFragment : Fragment() {
         list.add(CarouselEntity(array.getResourceId(2, -1)))
         list.add(CarouselEntity(array.getResourceId(3, -1)))
 
-        val layoutManager = CarouselLayoutManager(HeroCarouselStrategy())
+        val layoutManager = CarouselLayoutManager(FullScreenCarouselStrategy())
         layoutManager.carouselAlignment = CarouselLayoutManager.ALIGNMENT_CENTER
         binding.homeCarouselRecyclerView.adapter = adapter
         binding.homeCarouselRecyclerView.layoutManager = layoutManager
