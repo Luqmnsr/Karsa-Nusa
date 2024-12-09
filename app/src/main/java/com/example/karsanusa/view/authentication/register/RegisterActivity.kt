@@ -2,7 +2,6 @@ package com.example.karsanusa.view.authentication.register
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -14,7 +13,6 @@ import android.view.Gravity
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -45,7 +43,6 @@ class RegisterActivity : AppCompatActivity() {
         setupPasswordValidation()
         setupFormValidation()
         styleSignupButton()
-        setupDismissKeyboard()
 
         setupClearButton(binding.nameEditText)
         setupClearButton(binding.emailEditText)
@@ -139,25 +136,6 @@ class RegisterActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {}
         })
-    }
-
-    private fun setupDismissKeyboard() {
-        // Menyembunyikan keyboard jika pengguna mengklik area di luar EditText
-        binding.root.setOnClickListener {
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
-        }
-
-        // Agar keyboard tidak tertutup saat mengetik di EditText
-        binding.nameEditText.setOnClickListener {
-            // Biarkan keyboard muncul saat pengguna mengetik
-        }
-        binding.emailEditText.setOnClickListener {
-            // Biarkan keyboard muncul saat mengetik pada emailEditText
-        }
-        binding.passwordEditText.setOnClickListener {
-            // Biarkan keyboard muncul saat mengetik pada passwordEditText
-        }
     }
 
     private fun setupFormValidation() {
