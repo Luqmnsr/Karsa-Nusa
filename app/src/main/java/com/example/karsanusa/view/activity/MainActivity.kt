@@ -22,19 +22,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        // Initialize themePreference
         themePreference = ThemePreference.getInstance(this.themeDataStore)
-        // Apply theme before setContentView
         applyThemeSettings()
 
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
 
-        // Initialize bottom navigation and navigation controller
         val navView: BottomNavigationView = binding.bottomNavigation
         val navController = findNavController(R.id.activity_main_fragment)
         val appBarConfiguration = AppBarConfiguration(
@@ -50,7 +46,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun applyThemeSettings() {
-        // Use lifecycleScope to fetch theme setting
         lifecycleScope.launch {
             themePreference.getThemeSetting().collect { isDarkModeActive ->
                 Log.d("MainActivity", "Theme isDarkModeActive: $isDarkModeActive")

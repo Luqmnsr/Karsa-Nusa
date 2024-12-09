@@ -24,7 +24,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.karsanusa.R
 import com.example.karsanusa.data.preference.UserModel
 import com.example.karsanusa.databinding.ActivityRegisterBinding
-import com.example.karsanusa.view.activity.MainActivity
+import com.example.karsanusa.view.authentication.login.LoginActivity
 import com.example.karsanusa.view.vmfactory.RegisterViewModelFactory
 
 class RegisterActivity : AppCompatActivity() {
@@ -87,7 +87,7 @@ class RegisterActivity : AppCompatActivity() {
                         )
                     )
 
-                    val intent = Intent(this@RegisterActivity, MainActivity::class.java)
+                    val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
 
                     startActivity(intent)
