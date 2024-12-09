@@ -15,4 +15,10 @@ object Injection {
 //            apiService
         )
     }
+
+    fun provideUserRepository(context: Context): UserRepository {
+        val userPreference = UserPreference.getInstance(context.dataStore)
+
+        return UserRepository.getInstance(userPreference)
+    }
 }
