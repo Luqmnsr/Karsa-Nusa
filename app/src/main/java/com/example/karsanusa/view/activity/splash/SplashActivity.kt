@@ -1,4 +1,4 @@
-package com.example.karsanusa.view.activity
+package com.example.karsanusa.view.activity.splash
 
 import android.content.Intent
 import android.os.Bundle

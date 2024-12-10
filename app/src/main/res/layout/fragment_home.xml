@@ -45,15 +45,6 @@
                 android:clipChildren="false"
                 android:clipToPadding="false"/>
 
-            <Button
-                android:id="@+id/home_button_show_more"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:text="@string/button_show_all"
-                style="@style/Widget.Material3.Button.TextButton"/>
-
             <TextView
                 android:id="@+id/tvFeature"
                 android:layout_width="match_parent"
@@ -72,31 +63,37 @@
                 android:layout_marginTop="8dp"
                 android:gravity="center">
 
-                <Button
+                <ImageButton
                     android:id="@+id/button_1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
                     android:layout_weight="1"
-                    android:text="Button 1" />
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/button_outline"
+                    android:src="@drawable/button_wayang"/>
 
-                <Button
+                <ImageButton
                     android:id="@+id/button_2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
                     android:layout_weight="1"
-                    android:text="Button 2" />
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/button_outline"
+                    android:src="@drawable/button_batik" />
 
                 <Button
                     android:id="@+id/button_3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
                     android:layout_weight="1"
                     android:text="Button 3" />
 
                 <Button
                     android:id="@+id/button_4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
                     android:layout_weight="1"
                     android:text="Button 4" />
             </LinearLayout>
@@ -105,7 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:gravity="center">
 
                 <TextView
@@ -113,6 +110,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
                     android:text="Wayang"
                     android:fontFamily="@font/poppins_medium"
                     android:gravity="center"/>
@@ -122,6 +121,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
                     android:text="Batik"
                     android:fontFamily="@font/poppins_medium"
                     android:gravity="center"/>

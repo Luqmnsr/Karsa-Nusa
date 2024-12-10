@@ -13,7 +13,10 @@
         android:theme="@style/Theme.KarsaNusa"
         tools:targetApi="31">
         <activity
-            android:name=".view.activity.SplashActivity"
+            android:name=".view.activity.res.ResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,9 +34,8 @@
             android:name=".view.authentication.login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activity.MainActivity"
-            android:exported="false"/>
-
+            android:name=".view.activity.main.MainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

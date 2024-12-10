@@ -18,6 +18,7 @@ import com.example.karsanusa.BuildConfig
 import com.example.karsanusa.R
 import com.example.karsanusa.data.local.entity.CarouselEntity
 import com.example.karsanusa.databinding.FragmentHomeBinding
+import com.example.karsanusa.view.activity.batik.BatikActivity
 import com.example.karsanusa.view.adapter.CarouselAdapter
 import com.example.karsanusa.view.authentication.login.LoginActivity
 import com.example.karsanusa.view.authentication.welcome.WelcomeActivity
@@ -76,6 +77,11 @@ class HomeFragment : Fragment() {
 
         binding.dummyButtonToWelcome.setOnClickListener {
             val intent = Intent(requireContext(), WelcomeActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.button2.setOnClickListener {
+            val intent = Intent(requireContext(), BatikActivity::class.java)
             startActivity(intent)
         }
 

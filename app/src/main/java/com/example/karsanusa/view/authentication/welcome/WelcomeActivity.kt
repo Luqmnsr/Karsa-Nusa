@@ -10,7 +10,7 @@ import androidx.lifecycle.asLiveData
 import com.example.karsanusa.data.preference.UserPreference
 import com.example.karsanusa.data.preference.dataStore
 import com.example.karsanusa.databinding.ActivityWelcomeBinding
-import com.example.karsanusa.view.activity.MainActivity
+import com.example.karsanusa.view.activity.main.MainActivity
 import com.example.karsanusa.view.authentication.login.LoginActivity
 
 class WelcomeActivity : AppCompatActivity() {

@@ -32,7 +32,6 @@ class ProfileFragment : Fragment() {
         requireContext().getSharedPreferences("settings", Context.MODE_PRIVATE)
     }
 
-    // Initialize the ViewModel using ViewModelProvider and passing ThemePreference instance
     private val profileViewModel: ProfileViewModel by viewModels {
         ThemeViewModelFactory(
             ThemePreference.getInstance(requireContext().themeDataStore),
@@ -57,27 +56,20 @@ class ProfileFragment : Fragment() {
         val languages = arrayOf("English", "Bahasa Indonesia")
         setLanguage(languages[selectedLanguageIndex])
 
-        // Tambahkan listener untuk tombol tema
         binding.buttonProfileTheme.setOnClickListener {
-            // Aksi ketika tombol tema ditekan
             Toast.makeText(requireContext(), "Theme button clicked!", Toast.LENGTH_SHORT).show()
             showThemeSelectionDialog()
         }
 
-        // Tambahkan listener untuk tombol bahasa
         binding.buttonProfileLanguange.setOnClickListener {
-            // Aksi ketika tombol bahasa ditekan
             Toast.makeText(requireContext(), "Language button clicked!", Toast.LENGTH_SHORT).show()
             showLanguageDialog()
         }
 
-        // Tambahkan listener untuk tombol akun
         binding.buttonProfileSignOut.setOnClickListener {
-            // Aksi ketika tombol akun ditekan
             Toast.makeText(requireContext(), "Account button clicked!", Toast.LENGTH_SHORT).show()
             showLogoutDialog()
         }
-
     }
 
     private fun showThemeSelectionDialog() {

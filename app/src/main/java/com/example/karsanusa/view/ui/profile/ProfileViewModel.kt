@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.karsanusa.data.preference.ThemePreference
+import com.example.karsanusa.data.preference.UserModel
 import com.example.karsanusa.data.repository.UserRepository
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(
@@ -22,6 +24,8 @@ class ProfileViewModel(
             pref.saveThemeSetting(isDarkModeActive)
         }
     }
+
+    val userSession: Flow<UserModel> = repository.getSession()
 
     fun logout() {
         viewModelScope.launch {

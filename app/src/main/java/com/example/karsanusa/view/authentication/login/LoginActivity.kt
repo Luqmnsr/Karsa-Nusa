@@ -25,7 +25,7 @@ import androidx.core.content.ContextCompat
 import com.example.karsanusa.R
 import com.example.karsanusa.data.preference.UserModel
 import com.example.karsanusa.databinding.ActivityLoginBinding
-import com.example.karsanusa.view.activity.MainActivity
+import com.example.karsanusa.view.activity.main.MainActivity
 import com.example.karsanusa.view.authentication.register.RegisterActivity
 import com.example.karsanusa.view.vmfactory.SessionViewModelFactory
 

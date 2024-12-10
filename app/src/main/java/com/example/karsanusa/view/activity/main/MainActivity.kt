@@ -1,4 +1,4 @@
-package com.example.karsanusa.view.activity
+package com.example.karsanusa.view.activity.main
 
 import android.os.Bundle
 import android.util.Log

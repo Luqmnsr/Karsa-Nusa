@@ -104,8 +104,10 @@
         android:id="@+id/result_text_description_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="@string/text_description"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="@id/result_image_card"
         app:layout_constraintStart_toStartOf="@id/result_image_card"
@@ -116,29 +118,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/text_description"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@+id/result_image_card"
         app:layout_constraintStart_toStartOf="@+id/result_image_card"
         app:layout_constraintTop_toBottomOf="@+id/result_text_description_title" />
-
-    <Button
-        android:id="@+id/result_button_shopee"
-        style="@style/Widget.Material3.Button.TonalButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="@string/button_shopee"
-        app:layout_constraintEnd_toStartOf="@id/result_button_tokopedia"
-        app:layout_constraintStart_toStartOf="@+id/result_image_card"
-        app:layout_constraintTop_toBottomOf="@+id/result_text_description" />
-
-    <Button
-        android:id="@+id/result_button_tokopedia"
-        style="@style/Widget.Material3.Button.TonalButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/button_tokopedia"
-        app:layout_constraintEnd_toEndOf="@+id/result_image_card"
-        app:layout_constraintStart_toEndOf="@+id/result_button_shopee"
-        app:layout_constraintTop_toBottomOf="@+id/result_text_description" />
 </androidx.constraintlayout.widget.ConstraintLayout>
