@@ -141,6 +141,7 @@ class BatikActivity : AppCompatActivity() {
     private val cameraLaunch = registerForActivityResult(
         ActivityResultContracts.TakePicture()) { isSuccess ->
         if (isSuccess) {
+            currentImageUri?.let { startCrop(it) }
             showImage()
         } else {
             currentImageUri = null

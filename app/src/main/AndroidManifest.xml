@@ -28,6 +28,9 @@
             android:name=".view.authentication.welcome.WelcomeActivity"
             android:exported="false" />
         <activity
+            android:name=".view.activity.batik.BatikActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.authentication.register.RegisterActivity"
             android:exported="false" />
         <activity
@@ -36,6 +39,10 @@
         <activity
             android:name=".view.activity.main.MainActivity"
             android:exported="false" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>
