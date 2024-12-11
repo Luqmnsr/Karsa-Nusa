@@ -162,6 +162,15 @@
                 android:layout_marginTop="16dp"
                 android:visibility="gone" />
 
+            <TextView
+                android:id="@+id/tvEmptyMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="unavailable_news"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp" />
+
             <!-- RecyclerView for Cultural News (Horizontal) -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCulturalNews"

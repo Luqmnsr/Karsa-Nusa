@@ -15,27 +15,27 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.example.karsanusa.R
 import com.example.karsanusa.data.preference.UserModel
 import com.example.karsanusa.databinding.ActivityRegisterBinding
 import com.example.karsanusa.view.authentication.login.LoginActivity
-import com.example.karsanusa.view.vmfactory.RegisterViewModelFactory
+import com.example.karsanusa.view.vmfactory.SessionViewModelFactory
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
-    private lateinit var userViewModel: RegisterViewModel
+
+    private val registerViewModel by viewModels<RegisterViewModel> {
+        SessionViewModelFactory.getInstance(application)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val viewModelFactory = RegisterViewModelFactory.getInstance(this)
-        userViewModel = ViewModelProvider(this, viewModelFactory)[RegisterViewModel::class.java]
 
         setupView()
         setupAction()
@@ -76,7 +76,7 @@ class RegisterActivity : AppCompatActivity() {
                 setTitle("Yeah!")
                 setMessage("Akun dengan $email sudah jadi nih. Yuk, login dan belajar coding.")
                 setPositiveButton("Lanjut") { _, _ ->
-                    userViewModel.saveSession(
+                    registerViewModel.saveSession(
                         UserModel(
                             binding.emailEditText.text.toString(),
                             binding.nameEditText.text.toString(),

@@ -96,4 +96,6 @@
     <string name="cancel">Kembali</string>
     <string name="done">Selesai</string>
     <string name="analyze_confirmation">Ingin kembali?</string>
+    <string name="failed_to_load_news">Kesalahan dalam mengambil news</string>
+    <string name="unavailable_news">Tidak ada berita</string>
 </resources>

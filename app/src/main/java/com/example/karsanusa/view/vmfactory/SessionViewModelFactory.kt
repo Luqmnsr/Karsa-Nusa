@@ -6,9 +6,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.karsanusa.data.di.Injection
 import com.example.karsanusa.data.repository.UserRepository
 import com.example.karsanusa.view.authentication.login.LoginViewModel
+import com.example.karsanusa.view.authentication.register.RegisterViewModel
 
 class SessionViewModelFactory(
-    private val repository: UserRepository
+    private val repository: UserRepository,
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -16,6 +17,9 @@ class SessionViewModelFactory(
         return when {
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
+                RegisterViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

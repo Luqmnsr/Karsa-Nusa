@@ -14,8 +14,8 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BASE_URL", "\"https://batik-news-784317575878.asia-southeast2.run.app/\"")
     }
 
     buildTypes {
