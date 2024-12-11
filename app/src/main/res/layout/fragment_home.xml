@@ -209,13 +209,6 @@
                 android:text="Pindah ke login activity" />
 
             <Button
-                android:id="@+id/dummy_button_to_camera"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Pindah ke camera activity" />
-
-            <Button
                 android:id="@+id/dummy_button_to_welcome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
