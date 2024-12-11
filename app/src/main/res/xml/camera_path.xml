@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Folder's name is KarsaNusa, located inside internal/Pictures -->
+    <external-files-path name="KarsaNusa" path="Pictures"/>
+</paths>
