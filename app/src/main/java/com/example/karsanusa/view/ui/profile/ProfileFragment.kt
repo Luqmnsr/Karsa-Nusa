@@ -13,11 +13,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
-import com.example.karsanusa.data.preference.ThemePreference
-import com.example.karsanusa.data.preference.UserPreference
-import com.example.karsanusa.data.preference.dataStore
-import com.example.karsanusa.data.preference.themeDataStore
-import com.example.karsanusa.data.repository.UserRepository
 import com.example.karsanusa.databinding.FragmentProfileBinding
 import com.example.karsanusa.view.authentication.login.LoginActivity
 import com.example.karsanusa.view.vmfactory.ThemeViewModelFactory
@@ -33,11 +28,7 @@ class ProfileFragment : Fragment() {
     }
 
     private val profileViewModel: ProfileViewModel by viewModels {
-        ThemeViewModelFactory(
-            ThemePreference.getInstance(requireContext().themeDataStore),
-            UserRepository.getInstance(
-                UserPreference.getInstance(requireContext().dataStore)) // Get UserPreference instance
-        )
+        ThemeViewModelFactory.getInstance(requireContext())
     }
 
     override fun onCreateView(

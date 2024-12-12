@@ -5,18 +5,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.karsanusa.data.di.Injection
 import com.example.karsanusa.data.repository.NewsRepository
-import com.example.karsanusa.data.repository.UserRepository
+import com.example.karsanusa.data.repository.AuthRepository
 import com.example.karsanusa.view.ui.home.HomeViewModel
 
 class HomeViewModelFactory private constructor(
     private val newsRepository: NewsRepository,
-    private val userRepository: UserRepository
+    private val authRepository: AuthRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
-            return HomeViewModel(newsRepository, userRepository) as T
+            return HomeViewModel(newsRepository, authRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
@@ -29,7 +29,7 @@ class HomeViewModelFactory private constructor(
             return INSTANCE ?: synchronized(this) {
                 INSTANCE ?: HomeViewModelFactory(
                     Injection.provideNewsRepository(context),
-                    Injection.provideRepository(context)
+                    Injection.provideAuthRepository(context)
                 ).also { INSTANCE = it }
             }
         }

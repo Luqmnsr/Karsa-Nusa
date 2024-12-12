@@ -1,18 +1,15 @@
 package com.example.karsanusa.view.authentication.register
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.karsanusa.data.preference.UserModel
-import com.example.karsanusa.data.repository.UserRepository
-import kotlinx.coroutines.launch
+import com.example.karsanusa.data.repository.AuthRepository
 
 class RegisterViewModel(
-    private val userRepository: UserRepository
+    private val authRepository: AuthRepository
 ) : ViewModel() {
 
-    fun saveSession(userModel: UserModel) {
-        viewModelScope.launch {
-            userRepository.saveSession(userModel)
-        }
-    }
+    fun register(
+        fullname: String,
+        email: String,
+        password: String
+    ) = authRepository.register(fullname, email, password)
 }

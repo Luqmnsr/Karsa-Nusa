@@ -1,172 +1,198 @@
 package com.example.karsanusa.view.activity.batik
 
-import android.content.ContentValues
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.os.Environment
-import android.provider.MediaStore
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.FileProvider
-import androidx.lifecycle.ViewModelProvider
-import com.example.karsanusa.BuildConfig
+import androidx.core.content.ContextCompat
+import com.example.karsanusa.R
+import com.example.karsanusa.data.remote.response.ListPredictionsItem
 import com.example.karsanusa.databinding.ActivityBatikBinding
+import com.example.karsanusa.view.vmfactory.BatikViewModelFactory
 import com.yalantis.ucrop.UCrop
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Date
-import java.util.Locale
+import com.example.karsanusa.data.result.Result
+import com.example.karsanusa.view.activity.res.ResultActivity
 
 class BatikActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBatikBinding
-    private lateinit var viewModel: BatikViewModel
-    private val intentGallery = registerForActivityResult(
-        ActivityResultContracts.PickVisualMedia()
-    ) { result ->
-        if (result != null) {
-            startCrop(result)
-        }
-        else {
-            makeToast("Tidak dapat menemukan gambar")
-        }
+    private var currentImageUri: Uri? = null
+    private val viewModel by viewModels<BatikViewModel> {
+        BatikViewModelFactory.getInstance(this)
     }
-    private val intentCamera = registerForActivityResult(
-        ActivityResultContracts.TakePicture()
-    ) { isSuccess ->
-        if (isSuccess) {
-            val currentImage = viewModel.getCurrentImageUri()
-
-            if (currentImage != null) {
-                startCrop(currentImage)
-            }
-            else {
-                makeToast("Tidak dapat menemukan gambar")
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            permissions.entries.forEach { (permission, isGranted) ->
+                if (!isGranted) {
+                    Toast.makeText(this, "Permission $permission denied", Toast.LENGTH_LONG).show()
+                }
             }
         }
-        else {
-            makeToast("Tidak dapat menemukan gambar")
+
+    private fun allPermissionsGranted(): Boolean {
+        return requiredPermissions.all { permission -> // Use requiredPermissions
+            ContextCompat.checkSelfPermission(
+                this, permission
+            ) == PackageManager.PERMISSION_GRANTED
         }
     }
 
-    // Fungsi seganteng ini di-deprecated sama seorang Google. Google selingkuh bucin sama Kotlin.
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP && data != null) {
-            val destinationImageUri = UCrop.getOutput(data)
-
-            viewModel.setCurrentImageUri(destinationImageUri)
-            startShowImage()
-        }
-    }
+    private val requiredPermissions = arrayOf( // Renamed to requiredPermissions
+        android.Manifest.permission.CAMERA,
+        android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityBatikBinding.inflate(layoutInflater)
-        viewModel = ViewModelProvider(this)[BatikViewModel::class.java]
-
         setContentView(binding.root)
 
-        startShowImage()
-        startListener()
-    }
-
-    private fun startShowImage() {
-        val imageUri = viewModel.getCurrentImageUri()
-
-        if (imageUri != null) {
-            binding.previewImageView.setImageURI(imageUri)
-        }
-    }
-
-    private fun startListener() {
-        binding.buttonIntentGallery.setOnClickListener { _ ->
-            startGallery()
+        if (!allPermissionsGranted()) {
+            requestPermissionLauncher.launch(requiredPermissions) // Use requiredPermissions
         }
 
-        binding.buttonIntentCamera.setOnClickListener { _ ->
-            startCamera()
-        }
+        binding.buttonIntentGallery.setOnClickListener { startGallery() }
+        binding.buttonIntentCamera.setOnClickListener { startCamera() }
+        binding.buttonIntentAnalyze.setOnClickListener { startAnalyze() }
     }
 
     private fun startGallery() {
-        val pickType = ActivityResultContracts.PickVisualMedia.ImageOnly
+        launcherGallery.launch(
+            PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+    }
 
-        intentGallery.launch(PickVisualMediaRequest(pickType))
+    private val launcherGallery = registerForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri: Uri? ->
+        if (uri != null) {
+            currentImageUri = uri
+            startCrop(uri)
+            showImage()
+        } else {
+            Log.d("Photo Picker", "No media selected")
+        }
     }
 
     private fun startCamera() {
-        val fileNameFormat = "yyyyMMdd_HHmmss"
-        val timeStamp = SimpleDateFormat(fileNameFormat, Locale.US).format(Date())
-        var imageUri: Uri? = null
+        val imageUri = getImageUri(this)
+        currentImageUri = imageUri
+        launcherIntentCamera.launch(imageUri)
+    }
 
-        // Past Q
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            val contentValues = ContentValues()
-
-            contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, "$timeStamp.jpg")
-            contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-            contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, "Pictures/KarsaNusa")
-
-            imageUri = applicationContext.contentResolver.insert(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                contentValues
-            )
-        }
-        // Pre Q
-        else {
-            val filesDir = applicationContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-            val imageFile = File(filesDir, "/KarsaNusa/$timeStamp.jpg")
-
-            if (imageFile.parentFile?.exists() == false) {
-                imageFile.parentFile?.mkdir()
+    private val launcherIntentCamera = registerForActivityResult(
+        ActivityResultContracts.TakePicture()
+    ) { isSuccess ->
+        if (isSuccess) {
+            val uri = currentImageUri
+            uri?.let {
+                startCrop(it)
+                showImage()
             }
-
-            imageUri = FileProvider.getUriForFile(
-                applicationContext,
-                "${BuildConfig.APPLICATION_ID}.fileprovider",
-                imageFile
-            )
-        }
-
-        if (imageUri != null) {
-            viewModel.setCurrentImageUri(imageUri)
-            intentCamera.launch(imageUri)
-        }
-        else {
-            makeToast("Tidak dapat menulis berkas gambar ke direktori")
+        } else {
+            Log.e("Photo Camera", "Failed")
         }
     }
 
-    private fun startCrop(sourceImageUri: Uri) {
-        val calendar = Calendar.getInstance()
-        val hour = calendar.get(Calendar.HOUR_OF_DAY)
-        val minute = calendar.get(Calendar.MINUTE)
-        val second = calendar.get(Calendar.SECOND)
-        val fileName = "IMG_${hour}_${minute}_${second}"
-        val file = File.createTempFile(fileName, ".jpg", applicationContext.cacheDir)
-        val imageDestinationUri: Uri = Uri.fromFile(file)
+    private fun startCrop(imageUri: Uri) {
+        val uniqueFileName = "cropped_image_${System.currentTimeMillis()}.jpg"
+        val destinationUri = Uri.fromFile(File(this.cacheDir, uniqueFileName))
 
-        UCrop.of(sourceImageUri, imageDestinationUri)
-            .withAspectRatio(1F, 1F)
+        val uCropIntent = UCrop.of(imageUri, destinationUri)
+            .withAspectRatio(1f, 1f)
             .withMaxResultSize(224, 224)
-            .start(this)
+            .getIntent(this)
 
-        // After this function is called, onActivityResult will be called back.
+        cropImageResultLauncher.launch(uCropIntent)
     }
 
-    private fun makeToast(message: String) {
-        Toast.makeText(
-            applicationContext,
-            message,
-            Toast.LENGTH_SHORT
-        )
-            .show()
+    private val cropImageResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val resultUri = UCrop.getOutput(result.data!!)
+            resultUri?.let {
+                currentImageUri = it
+                showImage()
+            }
+        } else if (result.resultCode == UCrop.RESULT_ERROR) {
+            val cropError = UCrop.getError(result.data!!)
+            cropError?.let {
+                showToast(getString(R.string.image_load_failed))
+            } ?: showToast("Error cropping image.")
+        } else {
+            // Jika proses cropping dibatalkan
+            showToast("Cropping canceled.")
+        }
+    }
+
+    private fun showImage() {
+        currentImageUri?.let {
+            Log.d("Image URI", "showImage: $it")
+            binding.previewImageView.setImageURI(it)
+        }
+    }
+
+    private fun startAnalyze() {
+        val imageUri = currentImageUri // Create a local immutable copy
+        if (imageUri == null) {
+            showToast("No image selected")
+            return
+        }
+
+        val imageFile = uriToFile(imageUri, this).reduceFileImage()
+        Log.d("Image Classification File", "showImage: ${imageFile.path}")
+
+        showLoading(true)
+
+        val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+        val multipartBody = MultipartBody.Part.createFormData("photo", imageFile.name, requestImageFile)
+
+        viewModel.predictBatik(multipartBody).observe(this) { response ->
+            when (response) {
+                is Result.Error -> showToast(getString(R.string.failed_detection))
+                Result.Loading -> showLoading(true)
+                is Result.Success -> {
+                    showToast(getString(R.string.success_detection))
+                    val result = formatResult(response.data)
+                    moveToResult(result, imageUri)
+                }
+            }
+        }
+    }
+
+    private fun formatResult(predictions: List<ListPredictionsItem>): String {
+        val topPrediction = predictions.firstOrNull()
+        return if (topPrediction != null) {
+            "${topPrediction.name} with confidence ${topPrediction.confidence}"
+        } else {
+            "No prediction found"
+        }
+    }
+
+    private fun moveToResult(result: String, imageUri: Uri) {
+        val intent = Intent(this, ResultActivity::class.java).apply {
+            putExtra(ResultActivity.EXTRA_IMAGE_URI, imageUri.toString())
+            putExtra(ResultActivity.EXTRA_RESULT, result)
+        }
+        startActivity(intent)
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun showToast(message: String) {
+        showLoading(false)
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

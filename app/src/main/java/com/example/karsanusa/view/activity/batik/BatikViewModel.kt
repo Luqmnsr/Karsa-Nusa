@@ -1,14 +1,19 @@
 package com.example.karsanusa.view.activity.batik
 
-import android.net.Uri
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.example.karsanusa.data.remote.response.ListPredictionsItem
+import com.example.karsanusa.data.repository.ModelRepository
+import com.example.karsanusa.data.result.Result
+import okhttp3.MultipartBody
 
-class BatikViewModel : ViewModel() {
-    private var currentImageUri: Uri? = null
+class BatikViewModel(
+    private val modelRepository: ModelRepository
+) : ViewModel() {
 
-    fun getCurrentImageUri() = currentImageUri
-
-    fun setCurrentImageUri(uri: Uri?) {
-        currentImageUri = uri
+    fun predictBatik(
+        image: MultipartBody.Part
+    ): LiveData<Result<List<ListPredictionsItem>>> {
+        return modelRepository.predictBatik(image)
     }
 }

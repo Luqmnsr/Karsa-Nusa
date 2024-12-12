@@ -15,7 +15,9 @@ android {
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "BASE_URL", "\"https://batik-news-784317575878.asia-southeast2.run.app/\"")
+        buildConfigField("String", "BASE_URL_AUTH", "\"https://20241208t153719-dot-karsanusa-capstone.et.r.appspot.com/\"")
+        buildConfigField("String", "BASE_URL_NEWS", "\"https://batik-news-784317575878.asia-southeast2.run.app/\"")
+        buildConfigField("String", "BASE_URL_MODEL", "\"https://batik-model-784317575878.asia-southeast2.run.app/\"")
     }
 
     buildTypes {
@@ -79,6 +81,7 @@ dependencies {
 
     //Ucrop
     implementation("com.github.yalantis:ucrop:2.2.8")
+    implementation("androidx.exifinterface:exifinterface:1.3.7")
 
     //TFlite
     implementation("org.tensorflow:tensorflow-lite-support:0.4.4")

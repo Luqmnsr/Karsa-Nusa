@@ -18,10 +18,12 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.karsanusa.data.result.Result
 import com.example.karsanusa.R
 import com.example.karsanusa.data.preference.UserModel
 import com.example.karsanusa.databinding.ActivityLoginBinding
@@ -45,7 +47,6 @@ class LoginActivity : AppCompatActivity() {
         playAnimation()
         setupPasswordValidation()
         setupFormValidation()
-        styleSignupButton()
         setupHyperText()
 
         setupClearButton(binding.emailEditText)
@@ -67,24 +68,77 @@ class LoginActivity : AppCompatActivity() {
     private fun setupAction() {
         binding.loginButton.setOnClickListener {
             val email = binding.emailEditText.text.toString()
-            loginViewModel.saveSession(UserModel(email, "sample_token", true))
-            AlertDialog.Builder(this).apply {
-                setTitle("Yeah!")
-                setMessage("Anda berhasil login. Sudah tidak sabar untuk belajar ya?")
-                setPositiveButton("Lanjut") { _, _ ->
-                    val intent = Intent(context, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                    finish()
+            val password = binding.passwordEditText.text.toString()
+
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, getString(R.string.empty_field_error), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            showLoading(true)
+
+            loginViewModel.login(email, password).observe(this) { loginResponse ->
+                showLoading(false)
+                when (loginResponse) {
+                    is Result.Success -> {
+                        val token = loginResponse.data.token
+                        showDialog(true, email)
+
+                        val userModel = UserModel(
+                            email = email,
+                            token = token,
+                            isLogin = true
+                        )
+                        loginViewModel.saveSession(userModel)
+                    }
+                    is Result.Error -> {
+                        showDialog(false, email)
+                    }
+                    is Result.Loading -> {
+                        showLoading(true)
+                    }
                 }
-                create()
-                show()
             }
         }
         binding.hyperTextView.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun showDialog(isSuccess: Boolean, name: String) {
+        showLoading(false)
+        val dialogBuilder = AlertDialog.Builder(this)
+
+        if (isSuccess) {
+            // Dialog Success
+            dialogBuilder.apply {
+                setTitle(getString(R.string.login_success_title))
+                setMessage(getString(R.string.login_success_message, name))
+                setPositiveButton(getString(R.string.login_success_positive_button)) { _, _ ->
+                    val intent = Intent(context, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                    finish()
+                }
+            }
+        } else {
+            // Dialog Error
+            dialogBuilder.apply {
+                setTitle(getString(R.string.login_error_title))
+                setMessage(getString(R.string.login_error_message_email_used, name))
+                setPositiveButton(getString(R.string.login_error_positive_button)) { dialog, _ ->
+                    dialog.dismiss()
+                }
+            }
+        }
+        //Show Dialog
+        dialogBuilder.create().show()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.loginButton.isEnabled = !isLoading
     }
 
     private fun setupClearButton(editText: EditText) {
@@ -139,6 +193,7 @@ class LoginActivity : AppCompatActivity() {
 
                 // Enable the signup button only if all fields are filled
                 binding.loginButton.isEnabled = emailFilled && passwordFilled
+                styleSignupButton()
             }
 
             override fun afterTextChanged(s: Editable?) {}

@@ -4,12 +4,12 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.karsanusa.data.di.Injection
-import com.example.karsanusa.data.repository.UserRepository
+import com.example.karsanusa.data.repository.AuthRepository
 import com.example.karsanusa.view.authentication.login.LoginViewModel
 import com.example.karsanusa.view.authentication.register.RegisterViewModel
 
 class SessionViewModelFactory(
-    private val repository: UserRepository,
+    private val repository: AuthRepository,
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -32,7 +32,7 @@ class SessionViewModelFactory(
         fun getInstance(context: Context): SessionViewModelFactory {
             if (INSTANCE == null) {
                 synchronized(SessionViewModelFactory::class.java) {
-                    INSTANCE = SessionViewModelFactory(Injection.provideRepository(context))
+                    INSTANCE = SessionViewModelFactory(Injection.provideAuthRepository(context))
                 }
             }
             return INSTANCE as SessionViewModelFactory

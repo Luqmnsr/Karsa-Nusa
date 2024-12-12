@@ -4,14 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.example.karsanusa.data.remote.response.BatikResponseItem
 import com.example.karsanusa.data.remote.response.ErrorResponse
-import com.example.karsanusa.data.remote.retrofit.ApiService
+import com.example.karsanusa.data.remote.retrofit.ApiServiceNews
 import com.example.karsanusa.data.result.Result
 import com.google.gson.Gson
 import retrofit2.HttpException
 import java.io.IOException
 
 class NewsRepository private constructor(
-    private val apiService: ApiService
+    private val apiServiceNews: ApiServiceNews
 ) {
 
     fun getNews(
@@ -19,7 +19,7 @@ class NewsRepository private constructor(
         emit(Result.Loading)
 
         try {
-            val response = apiService.getNews().batikResponse
+            val response = apiServiceNews.getNews().batikResponse
             emit(Result.Success(response))
         } catch (e: IOException) {
             emit(Result.Error("No internet connection"))
@@ -37,10 +37,10 @@ class NewsRepository private constructor(
         @Volatile
         private var instance: NewsRepository? = null
         fun getInstance(
-            apiService: ApiService
+            apiServiceNews: ApiServiceNews
         ): NewsRepository =
             instance ?: synchronized(this) {
-                instance ?: NewsRepository(apiService)
+                instance ?: NewsRepository(apiServiceNews)
             }.also { instance = it }
     }
 }

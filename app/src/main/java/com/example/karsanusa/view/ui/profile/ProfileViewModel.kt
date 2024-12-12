@@ -5,12 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.karsanusa.data.preference.ThemePreference
-import com.example.karsanusa.data.repository.UserRepository
+import com.example.karsanusa.data.repository.AuthRepository
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(
     private val pref: ThemePreference,
-    private val repository: UserRepository
+    private val repository: AuthRepository
 ) : ViewModel() {
 
     fun getThemeSettings(): LiveData<Boolean> {

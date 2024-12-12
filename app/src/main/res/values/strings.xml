@@ -98,4 +98,6 @@
     <string name="analyze_confirmation">Ingin kembali?</string>
     <string name="failed_to_load_news">Kesalahan dalam mengambil news</string>
     <string name="unavailable_news">Tidak ada berita</string>
+    <string name="failed_detection">Kesalahan dalam mendeteksi</string>
+    <string name="success_detection">Sukses mendeteksi\n</string>
 </resources>

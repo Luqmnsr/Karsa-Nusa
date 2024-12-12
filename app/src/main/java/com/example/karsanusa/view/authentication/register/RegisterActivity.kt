@@ -20,10 +20,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.karsanusa.R
-import com.example.karsanusa.data.preference.UserModel
 import com.example.karsanusa.databinding.ActivityRegisterBinding
-import com.example.karsanusa.view.authentication.login.LoginActivity
 import com.example.karsanusa.view.vmfactory.SessionViewModelFactory
+import com.example.karsanusa.data.result.Result
+import com.example.karsanusa.view.authentication.login.LoginActivity
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -42,7 +42,6 @@ class RegisterActivity : AppCompatActivity() {
         playAnimation()
         setupPasswordValidation()
         setupFormValidation()
-        styleSignupButton()
 
         setupClearButton(binding.nameEditText)
         setupClearButton(binding.emailEditText)
@@ -63,37 +62,69 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun setupAction() {
         binding.registerButton.setOnClickListener {
-            val name = binding.nameEditText.text.toString()
+            val fullname = binding.nameEditText.text.toString()
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
 
-            if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            if (fullname.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, getString(R.string.empty_field_error), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            AlertDialog.Builder(this).apply {
-                setTitle("Yeah!")
-                setMessage("Akun dengan $email sudah jadi nih. Yuk, login dan belajar coding.")
-                setPositiveButton("Lanjut") { _, _ ->
-                    registerViewModel.saveSession(
-                        UserModel(
-                            binding.emailEditText.text.toString(),
-                            binding.nameEditText.text.toString(),
-                            true
-                        )
-                    )
+            showLoading(true)
 
+            registerViewModel.register(fullname, email, password).observe(this) { result ->
+                showLoading(false)
+                when (result) {
+                    is Result.Success -> {
+                        showDialog(isSuccess = true, email = email)
+                    }
+                    is Result.Error -> {
+                        showDialog(isSuccess = false, email = email)
+                    }
+                    is Result.Loading -> {
+                        showLoading(true)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun showDialog(isSuccess: Boolean, email: String) {
+        showLoading(false)
+        val dialogBuilder = AlertDialog.Builder(this)
+
+        if (isSuccess) {
+            // Dialog Success
+            dialogBuilder.apply {
+                setTitle(getString(R.string.register_success_title))
+                setMessage(getString(R.string.register_success_message, email))
+                setPositiveButton(getString(R.string.register_success_positive_button)) { _, _ ->
                     val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
 
                     startActivity(intent)
                     finish()
+                    finish()
                 }
-                create()
-                show()
+            }
+        } else {
+            // Dialog Error
+            dialogBuilder.apply {
+                setTitle(getString(R.string.register_error_title))
+                setMessage(getString(R.string.register_error_message_email_used, email))
+                setPositiveButton(getString(R.string.register_error_positive_button)) { dialog, _ ->
+                    dialog.dismiss()
+                }
             }
         }
+        //Show Dialog
+        dialogBuilder.create().show()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.registerButton.isEnabled = !isLoading
     }
 
     //Style
@@ -150,6 +181,7 @@ class RegisterActivity : AppCompatActivity() {
 
                 // Enable the signup button only if all fields are filled
                 binding.registerButton.isEnabled = nameFilled && emailFilled && passwordFilled
+                styleSignupButton()
             }
 
             override fun afterTextChanged(s: Editable?) {}
