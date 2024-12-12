@@ -21,7 +21,7 @@
             android:padding="8dp">
 
             <ImageView
-                android:id="@+id/ivItemPhoto"
+                android:id="@+id/ivItemThumbnail"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:contentDescription="News Description"
@@ -33,34 +33,48 @@
                 app:layout_constraintWidth_percent="1.0" />
 
             <TextView
-                android:id="@+id/tvItemName"
+                android:id="@+id/tvItemTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                android:paddingStart="8dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="4dp"
-                android:paddingEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-medium"
-                app:layout_constraintTop_toBottomOf="@id/ivItemPhoto"
+                app:layout_constraintTop_toBottomOf="@id/ivItemThumbnail"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintWidth_percent="1.0" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/tvItemDescription"
+                android:id="@+id/tvItemSnippet"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingStart="8dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="8dp"
-                android:paddingEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvItemTitle"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/tvItemLink"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
                 android:textSize="14sp"
                 android:fontFamily="sans-serif-medium"
                 android:textColor="@android:color/darker_gray"
-                app:layout_constraintTop_toBottomOf="@id/tvItemName"
+                app:layout_constraintTop_toBottomOf="@id/tvItemSnippet"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />

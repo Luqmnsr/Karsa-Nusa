@@ -19,7 +19,7 @@ class NewsRepository private constructor(
         emit(Result.Loading)
 
         try {
-            val response = apiServiceNews.getNews().newsResponse
+            val response = apiServiceNews.getNews()
             emit(Result.Success(response))
         } catch (e: IOException) {
             emit(Result.Error("No internet connection"))

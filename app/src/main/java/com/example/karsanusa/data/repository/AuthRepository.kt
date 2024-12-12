@@ -41,7 +41,7 @@ class AuthRepository private constructor(
         emit(Result.Loading)
         try {
             val registerRequest = RegisterRequest(email, password, fullname)
-            println("Sending RegisterRequest: $registerRequest") // Log untuk debugging
+            println("Sending RegisterRequest: $registerRequest")
             val response = apiServiceAuth.register(registerRequest)
             emit(Result.Success(response))
         } catch (e: IOException) {

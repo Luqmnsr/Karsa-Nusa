@@ -17,13 +17,11 @@ import com.example.karsanusa.view.activity.batik.BatikActivity
 import com.example.karsanusa.view.adapter.CarouselAdapter
 import com.example.karsanusa.view.adapter.NewsAdapter
 import com.example.karsanusa.view.authentication.login.LoginActivity
-import com.example.karsanusa.view.authentication.welcome.WelcomeActivity
 import com.example.karsanusa.view.vmfactory.HomeViewModelFactory
 import com.google.android.material.carousel.CarouselLayoutManager
 import com.google.android.material.carousel.CarouselSnapHelper
 import com.google.android.material.carousel.FullScreenCarouselStrategy
 import com.example.karsanusa.data.result.Result
-import com.example.karsanusa.view.ui.DetailActivity
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -68,11 +66,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerViews() {
-        newsAdapter = NewsAdapter { story ->
-            val intent = Intent(requireContext(), DetailActivity::class.java).apply {
-                putExtra("EXTRA_STORY_ID", story.position)
-            }
-            startActivity(intent)
+        newsAdapter = NewsAdapter { newsItem ->
+            Toast.makeText(requireContext(), "Clicked: ${newsItem.title}", Toast.LENGTH_SHORT).show()
         }
 
         binding.rvCulturalNews.apply {
@@ -84,7 +79,7 @@ class HomeFragment : Fragment() {
     private fun observeViewModel() {
         homeViewModel.getSession().observe(viewLifecycleOwner) { user ->
             if (!user.isLogin) {
-                startActivity(Intent(requireContext(), WelcomeActivity::class.java))
+                startActivity(Intent(requireContext(), LoginActivity::class.java))
                 requireActivity().finish()
             }
         }

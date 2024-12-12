@@ -1,5 +1,7 @@
 package com.example.karsanusa.view.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -28,18 +30,24 @@ class NewsAdapter(
 
     class NewsViewHolder(private val binding: ItemNewsBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(news: NewsResponseItem, onClick: (NewsResponseItem) -> Unit) {
-            binding.tvItemName.text = news.title
-            binding.tvItemDescription.text = news.snippet
+            binding.tvItemTitle.text = news.title
+            binding.tvItemSnippet.text = news.snippet
+            binding.tvItemLink.text = news.link
 
             val imageUrl = news.thumbnail
             Glide.with(binding.root.context)
                 .load(imageUrl)
                 .placeholder(R.drawable.img_placeholder)
                 .error(R.drawable.error_placeholder)
-                .into(binding.ivItemPhoto)
+                .into(binding.ivItemThumbnail)
 
             binding.root.setOnClickListener {
                 onClick(news)
+            }
+
+            binding.tvItemLink.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(news.link))
+                binding.root.context.startActivity(intent)
             }
         }
     }
