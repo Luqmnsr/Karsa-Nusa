@@ -25,7 +25,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.karsanusa.data.result.Result
 import com.example.karsanusa.R
-import com.example.karsanusa.data.preference.UserModel
 import com.example.karsanusa.databinding.ActivityLoginBinding
 import com.example.karsanusa.view.activity.main.MainActivity
 import com.example.karsanusa.view.authentication.register.RegisterActivity
@@ -46,6 +45,7 @@ class LoginActivity : AppCompatActivity() {
         setupAction()
         playAnimation()
         setupPasswordValidation()
+        setupEmailValidation()
         setupFormValidation()
         setupHyperText()
 
@@ -77,19 +77,14 @@ class LoginActivity : AppCompatActivity() {
 
             showLoading(true)
 
-            loginViewModel.login(email, password).observe(this) { loginResponse ->
+            loginViewModel.login(email, password).observe(this) { result ->
                 showLoading(false)
-                when (loginResponse) {
+                when (result) {
                     is Result.Success -> {
-                        val token = loginResponse.data.token
+                        val token = result.data.token
                         showDialog(true, email)
+                        loginViewModel.saveSession(email, token)
 
-                        val userModel = UserModel(
-                            email = email,
-                            token = token,
-                            isLogin = true
-                        )
-                        loginViewModel.saveSession(userModel)
                     }
                     is Result.Error -> {
                         showDialog(false, email)
@@ -100,7 +95,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
-        binding.hyperTextView.setOnClickListener {
+    binding.hyperTextView.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
@@ -166,13 +161,31 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
+    private fun setupEmailValidation() {
+        binding.emailEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val email = s.toString()
+                binding.emailEditTextLayout.error = if (!email.matches("^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+\\.[A-Za-z]{2,})$".toRegex())) {
+                    binding.root.context.getString(R.string.email_format_error_message)
+                } else {
+                    null
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+    }
+
     private fun setupPasswordValidation() {
         binding.passwordEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                binding.passwordEditTextLayout.error = if (s != null && s.length < 8) {
-                    binding.root.context.getString(R.string.password_error_message)
+                val password = s.toString()
+                binding.passwordEditTextLayout.error = if (!password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$".toRegex())) {
+                    binding.root.context.getString(R.string.password_complexity_error_message)
                 } else {
                     null
                 }

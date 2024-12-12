@@ -91,13 +91,16 @@
     </integer-array>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="image_load_failed">Kesalahan dalam mengunggah gambar\n</string>
-    <string name="image_classifier_failed">Kesalahan mengklasifikasikan gambar\n</string>
+    <string name="image_load_failed">Kesalahan dalam mengunggah gambar</string>
+    <string name="image_classifier_failed">Kesalahan mengklasifikasikan gambar</string>
     <string name="cancel">Kembali</string>
     <string name="done">Selesai</string>
     <string name="analyze_confirmation">Ingin kembali?</string>
     <string name="failed_to_load_news">Kesalahan dalam mengambil news</string>
     <string name="unavailable_news">Tidak ada berita</string>
     <string name="failed_detection">Kesalahan dalam mendeteksi</string>
-    <string name="success_detection">Sukses mendeteksi\n</string>
+    <string name="success_detection">Sukses mendeteksi</string>
+    <string name="invalid_email_error">Email salah</string>
+    <string name="password_complexity_error_message">Password harus memiliki minimal 8 karakter, termasuk huruf besar, huruf kecil, dan angka</string>
+    <string name="email_format_error_message">Email harus mempunyai format yang benar, contoh aa@example.com</string>
 </resources>

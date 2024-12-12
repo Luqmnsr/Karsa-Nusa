@@ -40,6 +40,7 @@ class RegisterActivity : AppCompatActivity() {
         setupView()
         setupAction()
         playAnimation()
+        setupEmailValidation()
         setupPasswordValidation()
         setupFormValidation()
 
@@ -62,77 +63,82 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun setupAction() {
         binding.registerButton.setOnClickListener {
-            val fullname = binding.nameEditText.text.toString()
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
+            val fullname = binding.nameEditText.text.toString()
 
-            if (fullname.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, getString(R.string.empty_field_error), Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+            if (!isFormValid(email, password, fullname)) return@setOnClickListener
 
             showLoading(true)
 
-            registerViewModel.register(fullname, email, password).observe(this) { result ->
-                showLoading(false)
+            registerViewModel.register(email, password, fullname).observe(this) { result ->
                 when (result) {
                     is Result.Success -> {
-                        showDialog(isSuccess = true, email = email)
+                        showLoading(false)
+                        showDialog(true, email)
                     }
                     is Result.Error -> {
-                        showDialog(isSuccess = false, email = email)
+                        showLoading(false)
+                        showDialog(false, email)
                     }
-                    is Result.Loading -> {
-                        showLoading(true)
-                    }
+                    is Result.Loading -> showLoading(true)
                 }
             }
         }
     }
 
-    private fun showDialog(isSuccess: Boolean, email: String) {
-        showLoading(false)
+    private fun isFormValid(email: String, password: String, fullname: String): Boolean {
+        if (fullname.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, getString(R.string.empty_field_error), Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, getString(R.string.invalid_email_error), Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (!password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$".toRegex())) {
+            binding.passwordEditTextLayout.error = getString(R.string.password_complexity_error_message)
+            return false
+        }
+
+        return true
+    }
+
+    private fun showDialog(isSuccess: Boolean, message: String) {
         val dialogBuilder = AlertDialog.Builder(this)
 
         if (isSuccess) {
-            // Dialog Success
-            dialogBuilder.apply {
-                setTitle(getString(R.string.register_success_title))
-                setMessage(getString(R.string.register_success_message, email))
-                setPositiveButton(getString(R.string.register_success_positive_button)) { _, _ ->
+            dialogBuilder.setTitle(getString(R.string.register_success_title))
+                .setMessage(getString(R.string.register_success_message, message))
+                .setPositiveButton(getString(R.string.register_success_positive_button)) { _, _ ->
                     val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-
                     startActivity(intent)
                     finish()
-                    finish()
                 }
-            }
         } else {
-            // Dialog Error
-            dialogBuilder.apply {
-                setTitle(getString(R.string.register_error_title))
-                setMessage(getString(R.string.register_error_message_email_used, email))
-                setPositiveButton(getString(R.string.register_error_positive_button)) { dialog, _ ->
+            dialogBuilder.setTitle(getString(R.string.register_error_title))
+                .setMessage(message)
+                .setPositiveButton(getString(R.string.register_error_positive_button)) { dialog, _ ->
                     dialog.dismiss()
                 }
-            }
         }
-        //Show Dialog
+
         dialogBuilder.create().show()
     }
+
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         binding.registerButton.isEnabled = !isLoading
     }
 
-    //Style
     private fun setupClearButton(editText: EditText) {
         val clearButtonImage: Drawable =
             ContextCompat.getDrawable(this, R.drawable.ic_close) as Drawable
 
-        // Set up the listener to show or hide the clear button based on the text content
         editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
@@ -149,17 +155,18 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
 
-            override fun afterTextChanged(s: Editable) {}
+            override fun afterTextChanged(s: Editable?) {}
         })
     }
 
-    private fun setupPasswordValidation() {
-        binding.passwordEditText.addTextChangedListener(object : TextWatcher {
+    private fun setupEmailValidation() {
+        binding.emailEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                binding.passwordEditTextLayout.error = if (s != null && s.length < 8) {
-                    binding.root.context.getString(R.string.password_error_message)
+                val email = s.toString()
+                binding.emailEditTextLayout.error = if (!email.matches("^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+\\.[A-Za-z]{2,})$".toRegex())) {
+                    binding.root.context.getString(R.string.email_format_error_message)
                 } else {
                     null
                 }
@@ -168,6 +175,24 @@ class RegisterActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {}
         })
     }
+
+    private fun setupPasswordValidation() {
+        binding.passwordEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val password = s.toString()
+                binding.passwordEditTextLayout.error = if (!password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$".toRegex())) {
+                    binding.root.context.getString(R.string.password_complexity_error_message)
+                } else {
+                    null
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+    }
+
 
     private fun setupFormValidation() {
         val textWatcher = object : TextWatcher {
@@ -179,7 +204,6 @@ class RegisterActivity : AppCompatActivity() {
                 val passwordFilled = binding.passwordEditText.text.toString().isNotEmpty() &&
                         binding.passwordEditText.text.toString().length >= 8
 
-                // Enable the signup button only if all fields are filled
                 binding.registerButton.isEnabled = nameFilled && emailFilled && passwordFilled
                 styleSignupButton()
             }
@@ -187,14 +211,12 @@ class RegisterActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {}
         }
 
-        // Attach TextWatcher to each EditText
         binding.nameEditText.addTextChangedListener(textWatcher)
         binding.emailEditText.addTextChangedListener(textWatcher)
         binding.passwordEditText.addTextChangedListener(textWatcher)
     }
 
     private fun styleSignupButton() {
-        // Set custom styles for the signup button without hardcoding
         binding.registerButton.apply {
             background = if (isEnabled) {
                 ContextCompat.getDrawable(context, R.drawable.bg_button)

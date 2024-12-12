@@ -14,10 +14,10 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "se
 
 class UserPreference private constructor(private val dataStore: DataStore<Preferences>) {
 
-    suspend fun saveSession(user: UserModel) {
+    suspend fun saveSession(email: String, token: String) {
         dataStore.edit { preferences ->
-            preferences[EMAIL_KEY] = user.email
-            preferences[TOKEN_KEY] = user.token
+            preferences[EMAIL_KEY] = email
+            preferences[TOKEN_KEY] = token
             preferences[IS_LOGIN_KEY] = true
         }
     }
