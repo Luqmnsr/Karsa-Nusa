@@ -103,4 +103,5 @@
     <string name="invalid_email_error">Email salah</string>
     <string name="password_complexity_error_message">Password harus memiliki minimal 8 karakter, termasuk huruf besar, huruf kecil, dan angka</string>
     <string name="email_format_error_message">Email harus mempunyai format yang benar, contoh aa@example.com</string>
+    <string name="read_more">Baca selengkapnya</string>
 </resources>
