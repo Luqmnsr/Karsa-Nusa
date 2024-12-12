@@ -2,7 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="navy">#1D3C6A</color>
+    <color name="navy">#2D3D4F</color>
     <color name="button">#6F5643</color>
 
     <!--Title Auth-->

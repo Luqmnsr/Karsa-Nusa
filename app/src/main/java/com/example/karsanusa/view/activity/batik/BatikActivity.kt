@@ -63,6 +63,14 @@ class BatikActivity : AppCompatActivity() {
         binding.buttonIntentGallery.setOnClickListener { startGallery() }
         binding.buttonIntentCamera.setOnClickListener { startCamera() }
         binding.buttonIntentAnalyze.setOnClickListener { startAnalyze() }
+
+        setupActionBar()
+    }
+
+    private fun setupActionBar() {
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+        }
     }
 
     private fun startGallery() {
@@ -208,5 +216,10 @@ class BatikActivity : AppCompatActivity() {
     private fun showToast(message: String) {
         showLoading(false)
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
     }
 }
