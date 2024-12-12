@@ -32,7 +32,6 @@ class NewsAdapter(
         fun bind(news: NewsResponseItem, onClick: (NewsResponseItem) -> Unit) {
             binding.tvItemTitle.text = news.title
             binding.tvItemSnippet.text = news.snippet
-            binding.tvItemLink.text = news.link
 
             val imageUrl = news.thumbnail
             Glide.with(binding.root.context)

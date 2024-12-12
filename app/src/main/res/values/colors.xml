@@ -25,4 +25,7 @@
 
     <!-- Home -->
     <color name="background_main">#F0ECE7</color>
+
+    <!-- Read More -->
+    <color name="read_more">#ff9d00</color>
 </resources>
