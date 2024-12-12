@@ -27,14 +27,13 @@
                 android:id="@+id/home_welcome_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
                 android:ellipsize="end"
                 android:text="@string/title_welcome"
                 android:textSize="18sp"
                 android:fontFamily="@font/poppins_medium"
-
                 android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -42,6 +41,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:clipChildren="false"
                 android:clipToPadding="false"/>
 
@@ -50,9 +51,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_bold"
-                android:padding="8dp"
                 android:text="Feature"
                 android:textSize="20sp" />
 
@@ -82,20 +83,6 @@
                     android:layout_marginEnd="4dp"
                     android:background="@drawable/button_outline"
                     android:src="@drawable/button_batik" />
-
-                <Button
-                    android:id="@+id/button_3"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:layout_weight="1"
-                    android:text="Button 3" />
-
-                <Button
-                    android:id="@+id/button_4"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:layout_weight="1"
-                    android:text="Button 4" />
             </LinearLayout>
 
             <LinearLayout
@@ -112,7 +99,7 @@
                     android:layout_weight="1"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
-                    android:text="Wayang"
+                    android:text="Wayang\n(Under Development)"
                     android:fontFamily="@font/poppins_medium"
                     android:gravity="center"/>
 
@@ -126,34 +113,18 @@
                     android:text="Batik"
                     android:fontFamily="@font/poppins_medium"
                     android:gravity="center"/>
-
-                <TextView
-                    android:id="@+id/textButton_3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Coming Soon"
-                    android:fontFamily="@font/poppins_medium"
-                    android:gravity="center"/>
-
-                <TextView
-                    android:id="@+id/textButton_4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Others"
-                    android:fontFamily="@font/poppins_medium"
-                    android:gravity="center"/>
             </LinearLayout>
 
             <TextView
                 android:id="@+id/tvCulturalNews"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cultural News"
+                android:text="Culture News"
                 android:textSize="20sp"
                 android:fontFamily="@font/poppins_bold"
-                android:padding="8dp" />
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="8dp"/>
 
             <ProgressBar
                 android:id="@+id/progressBarCulturalNews"
@@ -168,7 +139,10 @@
                 android:layout_height="wrap_content"
                 android:text="unavailable_news"
                 android:textColor="@android:color/darker_gray"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:gravity="center"
                 android:textSize="16sp" />
 
             <!-- RecyclerView for Cultural News (Horizontal) -->
@@ -181,48 +155,6 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:orientation="horizontal"
                 tools:listitem="@layout/item_news" />
-
-            <!-- News Title -->
-            <TextView
-                android:id="@+id/tvNews"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="News"
-                android:textSize="20sp"
-                android:fontFamily="@font/poppins_bold"
-                android:padding="8dp" />
-
-            <ProgressBar
-                android:id="@+id/progressBarNews"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:visibility="gone" />
-
-            <!-- RecyclerView for News (Vertical) -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvNews"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:nestedScrollingEnabled="false"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:orientation="vertical"
-                tools:listitem="@layout/item_news" />
-
-            <Button
-                android:id="@+id/dummy_button_to_login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Pindah ke login activity" />
-
-            <Button
-                android:id="@+id/dummy_button_to_welcome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Pindah ke welcome activity" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

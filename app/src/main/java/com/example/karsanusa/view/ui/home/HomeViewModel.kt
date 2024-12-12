@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.karsanusa.data.preference.UserModel
-import com.example.karsanusa.data.remote.response.BatikResponseItem
+import com.example.karsanusa.data.remote.response.NewsResponseItem
 import com.example.karsanusa.data.repository.NewsRepository
 import com.example.karsanusa.data.repository.AuthRepository
 import com.example.karsanusa.data.result.Result
@@ -14,7 +14,7 @@ class HomeViewModel(
     private val authRepository: AuthRepository
 ) : ViewModel() {
 
-    fun getNews(): LiveData<Result<List<BatikResponseItem>>> {
+    fun getNews(): LiveData<Result<List<NewsResponseItem>>> {
         return newsRepository.getNews()
     }
 

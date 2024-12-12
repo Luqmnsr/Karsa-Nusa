@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="navy">#1D3C6A</color>
 
     <!--Title Auth-->
     <color name="title_register">#D2A24C</color>

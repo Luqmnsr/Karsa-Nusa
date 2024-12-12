@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.karsanusa.R
-import com.example.karsanusa.data.remote.response.BatikResponseItem
+import com.example.karsanusa.data.remote.response.NewsResponseItem
 import com.example.karsanusa.databinding.ItemNewsBinding
 
 class NewsAdapter(
-    private val onClick: (BatikResponseItem) -> Unit
-) : ListAdapter<BatikResponseItem, NewsAdapter.NewsViewHolder>(DIFF_CALLBACK) {
+    private val onClick: (NewsResponseItem) -> Unit
+) : ListAdapter<NewsResponseItem, NewsAdapter.NewsViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val binding = ItemNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -27,7 +27,7 @@ class NewsAdapter(
     }
 
     class NewsViewHolder(private val binding: ItemNewsBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(news: BatikResponseItem, onClick: (BatikResponseItem) -> Unit) {
+        fun bind(news: NewsResponseItem, onClick: (NewsResponseItem) -> Unit) {
             binding.tvItemName.text = news.title
             binding.tvItemDescription.text = news.snippet
 
@@ -45,17 +45,17 @@ class NewsAdapter(
     }
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<BatikResponseItem>() {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<NewsResponseItem>() {
             override fun areItemsTheSame(
-                oldItem: BatikResponseItem,
-                newItem: BatikResponseItem
+                oldItem: NewsResponseItem,
+                newItem: NewsResponseItem
             ): Boolean {
                 return oldItem.position == newItem.position
             }
 
             override fun areContentsTheSame(
-                oldItem: BatikResponseItem,
-                newItem: BatikResponseItem
+                oldItem: NewsResponseItem,
+                newItem: NewsResponseItem
             ): Boolean {
                 return oldItem == newItem
             }

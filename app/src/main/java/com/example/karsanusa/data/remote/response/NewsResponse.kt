@@ -2,13 +2,13 @@ package com.example.karsanusa.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class BatikResponse(
+data class NewsResponse(
 
-	@field:SerializedName("batikResponse")
-	val batikResponse: List<BatikResponseItem>
+	@field:SerializedName("NewsResponse")
+	val newsResponse: List<NewsResponseItem>
 )
 
-data class BatikResponseItem(
+data class NewsResponseItem(
 
 	@field:SerializedName("date")
 	val date: String,

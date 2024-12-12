@@ -2,8 +2,8 @@ package com.example.karsanusa.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
-import com.example.karsanusa.data.remote.response.BatikResponseItem
 import com.example.karsanusa.data.remote.response.ErrorResponse
+import com.example.karsanusa.data.remote.response.NewsResponseItem
 import com.example.karsanusa.data.remote.retrofit.ApiServiceNews
 import com.example.karsanusa.data.result.Result
 import com.google.gson.Gson
@@ -15,11 +15,11 @@ class NewsRepository private constructor(
 ) {
 
     fun getNews(
-    ): LiveData<Result<List<BatikResponseItem>>> = liveData {
+    ): LiveData<Result<List<NewsResponseItem>>> = liveData {
         emit(Result.Loading)
 
         try {
-            val response = apiServiceNews.getNews().batikResponse
+            val response = apiServiceNews.getNews().newsResponse
             emit(Result.Success(response))
         } catch (e: IOException) {
             emit(Result.Error("No internet connection"))

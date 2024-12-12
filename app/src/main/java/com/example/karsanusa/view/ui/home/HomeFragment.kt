@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.karsanusa.R
 import com.example.karsanusa.data.local.entity.CarouselEntity
+import com.example.karsanusa.data.remote.response.NewsResponseItem
 import com.example.karsanusa.databinding.FragmentHomeBinding
 import com.example.karsanusa.view.activity.batik.BatikActivity
 import com.example.karsanusa.view.adapter.CarouselAdapter
@@ -61,14 +62,6 @@ class HomeFragment : Fragment() {
         CarouselSnapHelper().attachToRecyclerView(binding.homeCarouselRecyclerView)
         adapter.submitList(list)
 
-        binding.dummyButtonToLogin.setOnClickListener {
-            startActivity(Intent(requireContext(), LoginActivity::class.java))
-        }
-
-        binding.dummyButtonToWelcome.setOnClickListener {
-            startActivity(Intent(requireContext(), WelcomeActivity::class.java))
-        }
-
         binding.button2.setOnClickListener {
             startActivity(Intent(requireContext(), BatikActivity::class.java))
         }
@@ -96,7 +89,7 @@ class HomeFragment : Fragment() {
             }
         }
 
-        homeViewModel.getNews().observe(viewLifecycleOwner) { result ->
+        homeViewModel.getNews().observe(viewLifecycleOwner) { result: Result<List<NewsResponseItem>> ->
             when (result) {
                 is Result.Loading -> {
                     binding.progressBarCulturalNews.visibility = View.VISIBLE
@@ -115,5 +108,6 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
     }
 }
