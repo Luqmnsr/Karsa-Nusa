@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Karsa Nusa</string>
 
-    <string name="title_welcome">Welcome, {user} to KarsaNusa</string>
+    <string name="title_welcome">Welcome to KarsaNusa!</string>
     <string name="title_community">Community</string>
     <string name="title_profile">Profile</string>
     <string name="title_home">Home</string>

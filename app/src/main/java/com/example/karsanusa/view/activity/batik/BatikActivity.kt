@@ -13,7 +13,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.karsanusa.R
-import com.example.karsanusa.data.remote.response.ListPredictionsItem
 import com.example.karsanusa.databinding.ActivityBatikBinding
 import com.example.karsanusa.view.vmfactory.BatikViewModelFactory
 import com.yalantis.ucrop.UCrop
@@ -155,31 +154,46 @@ class BatikActivity : AppCompatActivity() {
         showLoading(true)
 
         val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
-        val multipartBody = MultipartBody.Part.createFormData("photo", imageFile.name, requestImageFile)
+        val multipartBody = MultipartBody.Part.createFormData("image", imageFile.name, requestImageFile)
 
         viewModel.predictBatik(multipartBody).observe(this) { response ->
+            showLoading(false)
             when (response) {
-                is Result.Error -> showToast(getString(R.string.failed_detection))
-                Result.Loading -> showLoading(true)
+                is Result.Error -> {
+                    Log.e("BatikActivity", "Detection failed: ${response.error}")
+                    showToast(getString(R.string.failed_detection))
+                }
+                Result.Loading -> {
+                    Log.d("BatikActivity", "Loading detection...")
+                    showLoading(true)
+                }
                 is Result.Success -> {
-                    showToast(getString(R.string.success_detection))
-                    val result = formatResult(response.data)
+                    Log.d("BatikActivity", "Detection successful: ${response.data}")
+                    val result = formatResult(response.data.predictions)
                     moveToResult(result, imageUri)
+                    showToast(getString(R.string.success_detection))
                 }
             }
         }
     }
 
-    private fun formatResult(predictions: List<ListPredictionsItem>): String {
-        val topPrediction = predictions.firstOrNull()
+    private fun formatResult(predictions: Map<String, Double>): String {
+        if (predictions.isEmpty()) {
+            return "No predictions available"
+        }
+
+        // Find the top prediction with the highest confidence
+        val topPrediction = predictions.maxByOrNull { it.value }
+
         return if (topPrediction != null) {
-            "${topPrediction.name} with confidence ${topPrediction.confidence}"
+            "${topPrediction.key} with confidence ${topPrediction.value}"
         } else {
             "No prediction found"
         }
     }
 
     private fun moveToResult(result: String, imageUri: Uri) {
+        Log.d("MoveToResult", "Moving to ResultActivity with Result: $result and Image URI: $imageUri")
         val intent = Intent(this, ResultActivity::class.java).apply {
             putExtra(ResultActivity.EXTRA_IMAGE_URI, imageUri.toString())
             putExtra(ResultActivity.EXTRA_RESULT, result)

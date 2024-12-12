@@ -4,18 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class ModelResponse(
 
-	@field:SerializedName("listPredictions")
-	val listPredictions: List<ListPredictionsItem>
-)
-
-data class ListPredictionsItem(
-
-	@field:SerializedName("identifier")
-	val identifier: String,
-
-	@field:SerializedName("confidence")
-	val confidence: Any,
-
-	@field:SerializedName("name")
-	val name: String
+	@field:SerializedName("predictions")
+	val predictions: Map<String, Double> // Using a Map for batik name and confidence
 )

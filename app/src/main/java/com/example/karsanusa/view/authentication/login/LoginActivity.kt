@@ -218,7 +218,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun styleSignupButton() {
-        // Set custom styles for login button
         binding.loginButton.apply {
             background = if (isEnabled) {
                 ContextCompat.getDrawable(context, R.drawable.bg_button)

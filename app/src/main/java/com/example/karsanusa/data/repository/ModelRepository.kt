@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.example.karsanusa.data.remote.response.DetailResponse
 import com.example.karsanusa.data.remote.response.ErrorResponse
-import com.example.karsanusa.data.remote.response.ListPredictionsItem
+import com.example.karsanusa.data.remote.response.ModelResponse
 import com.example.karsanusa.data.remote.retrofit.ApiServiceModel
 import com.example.karsanusa.data.result.Result
 import com.google.gson.Gson
@@ -18,11 +18,11 @@ class ModelRepository private constructor(
 
     fun predictBatik(
         image: MultipartBody.Part
-    ): LiveData<Result<List<ListPredictionsItem>>> = liveData {
+    ): LiveData<Result<ModelResponse>> = liveData {
         emit(Result.Loading)
 
         try {
-            val response = apiServiceModel.predictBatik(image).listPredictions
+            val response = apiServiceModel.predictBatik(image)
             emit(Result.Success(response))
         } catch (e: IOException) {
             emit(Result.Error("No internet connection"))
