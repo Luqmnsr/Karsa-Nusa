@@ -1,10 +1,7 @@
 package com.example.karsanusa.view.ui.profile
 
-import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,16 +13,11 @@ import androidx.fragment.app.viewModels
 import com.example.karsanusa.databinding.FragmentProfileBinding
 import com.example.karsanusa.view.authentication.login.LoginActivity
 import com.example.karsanusa.view.vmfactory.ThemeViewModelFactory
-import java.util.Locale
 
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-
-    private val sharedPreferences by lazy {
-        requireContext().getSharedPreferences("settings", Context.MODE_PRIVATE)
-    }
 
     private val profileViewModel: ProfileViewModel by viewModels {
         ThemeViewModelFactory.getInstance(requireContext())
@@ -43,18 +35,9 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val selectedLanguageIndex = loadLanguageIndex()
-        val languages = arrayOf("English", "Bahasa Indonesia")
-        setLanguage(languages[selectedLanguageIndex])
-
         binding.buttonProfileTheme.setOnClickListener {
             Toast.makeText(requireContext(), "Theme button clicked!", Toast.LENGTH_SHORT).show()
             showThemeSelectionDialog()
-        }
-
-        binding.buttonProfileLanguange.setOnClickListener {
-            Toast.makeText(requireContext(), "Language button clicked!", Toast.LENGTH_SHORT).show()
-            showLanguageDialog()
         }
 
         binding.buttonProfileSignOut.setOnClickListener {
@@ -96,57 +79,6 @@ class ProfileFragment : Fragment() {
                 }
                 .show()
         }
-    }
-
-    private fun showLanguageDialog() {
-        val languages = arrayOf("English", "Bahasa Indonesia")
-        var selectedLanguageIndex = loadLanguageIndex() // Ambil index bahasa yang disimpan
-
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Choose Language")
-            .setSingleChoiceItems(languages, selectedLanguageIndex) { _, which ->
-                selectedLanguageIndex = which // Update selected index
-            }
-            .setPositiveButton("Apply") { dialog, _ ->
-                val selectedLanguage = languages[selectedLanguageIndex]
-                setLanguage(selectedLanguage) // Ubah bahasa
-                saveLanguageIndex(selectedLanguageIndex) // Simpan pilihan bahasa
-                dialog.dismiss()
-                Toast.makeText(requireContext(), "Language changed to $selectedLanguage", Toast.LENGTH_SHORT).show()
-            }
-            .setNegativeButton("Cancel") { dialog, _ ->
-                dialog.dismiss()
-            }
-            .show()
-    }
-
-    private fun setLanguage(language: String) {
-        val locale = when (language) {
-            "Bahasa Indonesia" -> Locale("id")
-            "English" -> Locale("en")
-            else -> Locale("id") // Default ke Bahasa Indonesia
-        }
-
-        // Set default locale
-        Locale.setDefault(locale)
-
-        val configuration = Configuration(resources.configuration)
-        configuration.setLocale(locale)
-
-        // Terapkan konteks baru
-        requireActivity().createConfigurationContext(configuration)
-
-        Log.d("LanguageChange", "Language changed to: $language (Locale: ${locale.language})")
-    }
-
-    // Simpan pilihan bahasa yang dipilih ke SharedPreferences
-    private fun saveLanguageIndex(index: Int) {
-        sharedPreferences.edit().putInt("language_index", index).apply()
-    }
-
-    // Ambil pilihan bahasa yang disimpan dari SharedPreferences
-    private fun loadLanguageIndex(): Int {
-        return sharedPreferences.getInt("language_index", 1) // Default: Bahasa Indonesia (index 1)
     }
 
     private fun showLogoutDialog(){
