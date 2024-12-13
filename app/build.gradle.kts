@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("androidx.navigation.safeargs")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -17,7 +18,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL_AUTH", "\"https://20241208t153719-dot-karsanusa-capstone.et.r.appspot.com/\"")
         buildConfigField("String", "BASE_URL_NEWS", "\"https://batik-news-784317575878.asia-southeast2.run.app/\"")
-        buildConfigField("String", "BASE_URL_MODEL", "\"https://batik-model-784317575878.asia-southeast2.run.app/\"")
+        buildConfigField("String", "BASE_URL_MODEL", "\"https://batik-model-api-784317575878.asia-southeast2.run.app/\"")
     }
 
     buildTypes {

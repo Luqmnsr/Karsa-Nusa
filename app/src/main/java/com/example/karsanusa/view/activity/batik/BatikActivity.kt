@@ -13,15 +13,16 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.karsanusa.R
+import com.example.karsanusa.data.remote.response.ModelResponse
+import com.example.karsanusa.data.result.Result
 import com.example.karsanusa.databinding.ActivityBatikBinding
+import com.example.karsanusa.view.activity.res.ResultActivity
 import com.example.karsanusa.view.vmfactory.BatikViewModelFactory
 import com.yalantis.ucrop.UCrop
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
-import com.example.karsanusa.data.result.Result
-import com.example.karsanusa.view.activity.res.ResultActivity
 
 class BatikActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBatikBinding
@@ -177,34 +178,16 @@ class BatikActivity : AppCompatActivity() {
                 }
                 is Result.Success -> {
                     Log.d("BatikActivity", "Detection successful: ${response.data}")
-                    val result = formatResult(response.data.predictions)
-                    moveToResult(result, imageUri)
+                    moveToResult(response.data)
                     showToast(getString(R.string.success_detection))
                 }
             }
         }
     }
 
-    private fun formatResult(predictions: Map<String, Double>): String {
-        if (predictions.isEmpty()) {
-            return "No predictions available"
-        }
-
-        // Find the top prediction with the highest confidence
-        val topPrediction = predictions.maxByOrNull { it.value }
-
-        return if (topPrediction != null) {
-            "${topPrediction.key} with confidence ${topPrediction.value}"
-        } else {
-            "No prediction found"
-        }
-    }
-
-    private fun moveToResult(result: String, imageUri: Uri) {
-        Log.d("MoveToResult", "Moving to ResultActivity with Result: $result and Image URI: $imageUri")
+    private fun moveToResult(extraResponse: ModelResponse) {
         val intent = Intent(this, ResultActivity::class.java).apply {
-            putExtra(ResultActivity.EXTRA_IMAGE_URI, imageUri.toString())
-            putExtra(ResultActivity.EXTRA_RESULT, result)
+            putExtra(ResultActivity.EXTRA_RESPONSE, extraResponse)
         }
         startActivity(intent)
     }
