@@ -60,7 +60,6 @@
             app:layout_constraintTop_toBottomOf="@+id/titleTextView"
             tools:alpha="100" />
 
-
         <TextView
             android:id="@+id/nameTextView"
             android:layout_width="wrap_content"
@@ -68,7 +67,7 @@
             android:layout_marginTop="8dp"
             android:alpha="0"
             android:text="@string/name"
-            android:textColor="@color/black"
+            android:textColor="@color/text_primary"
             app:layout_constraintStart_toStartOf="@+id/titleTextView"
             app:layout_constraintTop_toBottomOf="@+id/messageTextView"
             tools:alpha="100" />
@@ -108,7 +107,7 @@
             android:layout_marginTop="8dp"
             android:alpha="0"
             android:text="@string/email"
-            android:textColor="@color/black"
+            android:textColor="@color/text_primary"
             app:layout_constraintStart_toStartOf="@+id/titleTextView"
             app:layout_constraintTop_toBottomOf="@+id/nameEditTextLayout"
             tools:alpha="100" />
@@ -148,7 +147,7 @@
             android:layout_marginTop="8dp"
             android:alpha="0"
             android:text="@string/password"
-            android:textColor="@color/black"
+            android:textColor="@color/text_primary"
             app:layout_constraintStart_toStartOf="@+id/titleTextView"
             app:layout_constraintTop_toBottomOf="@+id/emailEditTextLayout"
             tools:alpha="100" />

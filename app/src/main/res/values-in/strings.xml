@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Karsa Nusa</string>
 
-    <string name="title_welcome">Selamat datang, {user} di KarsaNusa</string>
+    <string name="title_welcome">Selamat datang di KarsaNusa!</string>
     <string name="title_community">Komunitas</string>
     <string name="title_profile">Profil</string>
     <string name="title_home">Beranda</string>
@@ -38,10 +38,10 @@
     <string name="button_register_text_disabled">Daftar</string>
 
     <!-- Dialog Login-->
-    <string name="login_success_title">Yeah!</string>
-    <string name="login_success_message">Anda berhasil masuk %1$s. Tidak sabar untuk mengupload cerita, ya?</string>
+    <string name="login_success_title">Yay!</string>
+    <string name="login_success_message">Anda berhasil masuk %1$s.</string>
     <string name="login_success_positive_button">Lanjut</string>
-    <string name="login_error_title">Oops!</string>
+    <string name="login_error_title">Ups!</string>
     <string name="login_error_message_email_used">Email/password untuk %1$s salah!. Silakan ulangi kembali.</string>
     <string name="login_error_positive_button">Coba Lagi</string>
 
@@ -49,7 +49,7 @@
     <string name="register_success_title">Yeah!</string>
     <string name="register_success_message">Akun dengan email %1$s sudah jadi nih. Yuk, login ke dalam aplikasinya.</string>
     <string name="register_success_positive_button">Lanjut</string>
-    <string name="register_error_title">Oops!</string>
+    <string name="register_error_title">Ups!</string>
     <string name="register_error_message_email_used">Email %1$s sudah digunakan. Silakan coba dengan email lain.</string>
     <string name="register_error_positive_button">Coba Lagi</string>
     <string name="empty_field_error">Harap isi semua kolom</string>
@@ -58,11 +58,6 @@
     <string name="button_show_all">Tampilkan lebih</string>
     <string name="button_signout">Keluar</string>
     <string name="button_theme">Tema</string>
-    <string name="button_languange">Bahasa</string>
-    <string name="button_shopee">Shopee</string>
-    <string name="button_tokopedia">Tokopedia</string>
-
-    <string name="hint_search">Ketik kata kunci</string>
 
     <string name="content_description_item_carousel_image">Ini adalah gambar item carousel</string>
     <string name="content_description_fragment_profile_image">Ini adalah foto profil</string>
@@ -81,7 +76,7 @@
     <string name="title_menu_3">Mulai</string>
     <string name="desc_menu_3">Mari Kita Mulai! Sekarang setelah Anda mempelajari lebih banyak tentang kami, mari kita mulai perjalanan Anda melalui warisan budaya.</string>
     <string name="begin">Mulai</string>
-    <string name="logout">Logout\n</string>
+    <string name="logout">Keluar</string>
 
     <integer-array name="carousel_images">
         <item>@drawable/a</item>
@@ -90,18 +85,33 @@
         <item>@drawable/d</item>
     </integer-array>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="image_load_failed">Fail to upload image</string>
-    <string name="image_classifier_failed">Fail to identify image</string>
-    <string name="cancel">Back</string>
-    <string name="done">Done</string>
-    <string name="analyze_confirmation">Are you sure want to go back?</string>
-    <string name="failed_to_load_news">Fail to retrieve news</string>
-    <string name="unavailable_news">No current news</string>
-    <string name="failed_detection">Fail to detect</string>
-    <string name="success_detection">Success to detect</string>
-    <string name="invalid_email_error">Email is wrong</string>
-    <string name="password_complexity_error_message">Password must contains at least 8 characters, including capital letter, small letter, and number</string>
-    <string name="email_format_error_message">Email format must be right, e.g. aa@example.com</string>
-    <string name="read_more">Read more</string>
+    <string name="hello_blank_fragment">Fragment kosong</string>
+    <string name="image_load_failed">Kesalahan dalam mengunggah gambar</string>
+    <string name="image_classifier_failed">Kesalahan dalam mengklasifikasikan gambar</string>
+    <string name="cancel">Kembali</string>
+    <string name="done">Selesai</string>
+    <string name="analyze_confirmation">Apa kamu yakin ingin kembali?</string>
+    <string name="failed_to_load_news">Kesalahan dalam mengambil berita</string>
+    <string name="unavailable_news">Tidak ada berita</string>
+    <string name="failed_detection">Kesalahan dalam mendeteksi</string>
+    <string name="success_detection">Sukses mendeteksi</string>
+    <string name="invalid_email_error">Email salah</string>
+    <string name="password_complexity_error_message">Kata sandi harus mengandung setidaknya 8 karakter, termasuk huruf kapital, huruf kecil, dan angka</string>
+    <string name="email_format_error_message">Format email harus benar, misalnya aa@example.com</string>
+    <string name="read_more">Baca Selengkapnya</string>
+    <string name="image">Foto</string>
+    <string name="mulaiScan">Yuk, Mulai scan batik!</string>
+    <string name="kamuBisa">Kamu bisa mengambil gambar\nmelalui kamera maupun galeri</string>
+    <string name="kamera">Kamera</string>
+    <string name="galeri">Galeri</string>
+    <string name="deteksi">Deteksi</string>
+    <string name="textview">Teks</string>
+    <string name="hasil_deteksi">Hasil Deteksi</string>
+    <string name="feature">Fitur</string>
+    <string name="wayang_n_under_development">Wayang\n(Dalam Pengembangan)</string>
+    <string name="culture_news">Berita Kebudayaan</string>
+    <string name="batik">Batik</string>
+    <string name="nama_batik">Nama Batik</string>
+    <string name="tingkat_kepercayaan">Tingkat Kepercayaan</string>
+    <string name="button_languange">Languange</string>
 </resources>

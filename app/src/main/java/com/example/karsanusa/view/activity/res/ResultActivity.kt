@@ -9,7 +9,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.karsanusa.BuildConfig
+
 import com.example.karsanusa.data.remote.response.ListPredictionsItem
 import com.example.karsanusa.data.remote.response.ModelResponse
 import com.example.karsanusa.databinding.ActivityResultBinding

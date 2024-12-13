@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.karsanusa.data.remote.response.ListPredictionsItem
 import com.example.karsanusa.databinding.ItemPredictionItemBinding
 import com.example.karsanusa.view.listener.ResultListener
+import java.text.DecimalFormat
 
 class ResultAdapter(
     private var resultListener: ResultListener
@@ -36,7 +37,8 @@ class ResultAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(predictionItem: ListPredictionsItem) {
             binding.predictionItemName.text = predictionItem.name
-            binding.predictionItemConfidence.text = predictionItem.confidence.toString()
+            val formattedConfidence = DecimalFormat("#.##").format(predictionItem.confidence * 100)
+            binding.predictionItemConfidence.text = "Confidence Score: $formattedConfidence%"
         }
     }
 

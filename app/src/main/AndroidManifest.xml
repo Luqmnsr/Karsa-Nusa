@@ -49,6 +49,9 @@
             android:name=".view.activity.main.MainActivity"
             android:exported="false" />
         <activity
+            android:name=".view.activity.detail.DetailActivity"
+            android:exported="false" />
+        <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="fullSensor"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

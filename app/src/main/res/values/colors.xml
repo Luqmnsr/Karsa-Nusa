@@ -22,6 +22,7 @@
     <!-- Text Auth -->
     <color name="hypertext_auth_500">#CC6B49</color>
     <color name="hypertext_auth_200">#EBB4B0</color>
+    <color name="text_primary">#000000</color>
 
     <!-- Home -->
     <color name="background_main">#F0ECE7</color>

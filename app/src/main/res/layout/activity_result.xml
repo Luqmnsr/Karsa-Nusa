@@ -96,7 +96,7 @@
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center"
-                android:text="Hasil Deteksi"
+                android:text="@string/hasil_deteksi"
                 android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="@id/result_image_card"
                 app:layout_constraintStart_toStartOf="@id/result_image_card"

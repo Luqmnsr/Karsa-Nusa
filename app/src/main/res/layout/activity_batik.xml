@@ -20,7 +20,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Yuk, Mulai scan batik!"
+            android:text="@string/mulaiScan"
             android:textSize="20sp"
             android:gravity="center"
             android:fontFamily="@font/poppins_bold"
@@ -48,7 +48,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Kamu bisa mengambil gambar\nmelalui kamera maupun galeri "
+            android:text="@string/kamuBisa"
             android:textSize="20sp"
             android:gravity="center"
             android:fontFamily="@font/poppins_medium"
@@ -105,7 +105,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="8dp"
                 android:gravity="center"
-                android:text="Kamera"
+                android:text="@string/kamera"
                 android:textSize="18sp"
                 android:fontFamily="@font/poppins_medium"/>
 
@@ -117,7 +117,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="16dp"
                 android:gravity="center"
-                android:text="Galeri"
+                android:text="@string/galeri"
                 android:textSize="18sp"
                 android:fontFamily="@font/poppins_medium"/>
         </LinearLayout>
@@ -130,7 +130,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="55dp"
-            android:text="Deteksi"
+            android:text="@string/deteksi"
             android:textSize="18sp"
             android:textColor="@color/white"
             android:fontFamily="@font/inter_semibold"

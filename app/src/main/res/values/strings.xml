@@ -40,7 +40,7 @@
 
     <!-- Dialog Login-->
     <string name="login_success_title">Yeah!</string>
-    <string name="login_success_message">You successfully logged in as %1$s. Can\'t wait to upload your story, right?</string>
+    <string name="login_success_message">"You successfully logged in as %1$s. "</string>
     <string name="login_success_positive_button">Continue</string>
     <string name="login_error_title">Oops!</string>
     <string name="login_error_message_email_used">The email/password for %1$s is incorrect! Please try again.</string>
@@ -58,11 +58,6 @@
     <string name="button_show_all">Show More</string>
     <string name="button_signout">Sign Out</string>
     <string name="button_theme">Theme</string>
-    <string name="button_languange">Language</string>
-    <string name="button_shopee">Shopee</string>
-    <string name="button_tokopedia">Tokopedia</string>
-
-    <string name="hint_search">Type a keyword</string>
 
     <string name="content_description_item_carousel_image">This is a carousel item image</string>
     <string name="content_description_fragment_profile_image">This is the profile picture</string>
@@ -81,7 +76,7 @@
     <string name="title_menu_3">Get Started</string>
     <string name="desc_menu_3">Let’s Get Started! Now that you know more about us, let’s begin your journey through cultural heritage.</string>
     <string name="begin">Start</string>
-    <string name="logout">Logout\n</string>
+    <string name="logout">Logout</string>
 
     <integer-array name="carousel_images">
         <item>@drawable/a</item>
@@ -91,18 +86,32 @@
     </integer-array>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="image_load_failed">Kesalahan dalam mengunggah gambar</string>
-    <string name="image_classifier_failed">Kesalahan mengklasifikasikan gambar</string>
-    <string name="cancel">Kembali</string>
-    <string name="done">Selesai</string>
-    <string name="analyze_confirmation">Ingin kembali?</string>
-    <string name="failed_to_load_news">Kesalahan dalam mengambil news</string>
-    <string name="unavailable_news">Tidak ada berita</string>
-    <string name="failed_detection">Kesalahan dalam mendeteksi</string>
-    <string name="success_detection">Sukses mendeteksi</string>
-    <string name="invalid_email_error">Email salah</string>
-    <string name="password_complexity_error_message">Password harus memiliki minimal 8 karakter, termasuk huruf besar, huruf kecil, dan angka</string>
-    <string name="email_format_error_message">Email harus mempunyai format yang benar, contoh aa@example.com</string>
-    <string name="read_more">Baca selengkapnya</string>
-    <string name="image">Foto</string>
+    <string name="image_load_failed">Error in uploading image</string>
+    <string name="image_classifier_failed">Error in classifying images</string>
+    <string name="cancel">Back</string>
+    <string name="done">Done</string>
+    <string name="analyze_confirmation">Are you sure want to go back?</string>
+    <string name="failed_to_load_news">Fail to retrieve news</string>
+    <string name="unavailable_news">No current news</string>
+    <string name="failed_detection">Fail to detect</string>
+    <string name="success_detection">Success to detect</string>
+    <string name="invalid_email_error">Email is wrong</string>
+    <string name="password_complexity_error_message">Password must contains at least 8 characters, including capital letter, small letter, and number</string>
+    <string name="email_format_error_message">Email format must be right, e.g. aa@example.com</string>
+    <string name="read_more">Read more</string>
+    <string name="image">Picture</string>
+    <string name="mulaiScan">Come on, start scanning batik!</string>
+    <string name="kamera">Camera</string>
+    <string name="galeri">Gallery</string>
+    <string name="deteksi">Detection</string>
+    <string name="textview">TextView</string>
+    <string name="hasil_deteksi">Detection Result</string>
+    <string name="feature">Feature</string>
+    <string name="wayang_n_under_development">Wayang\n(Under Development)</string>
+    <string name="culture_news">Culture News</string>
+    <string name="batik">Batik</string>
+    <string name="nama_batik">Batik Name</string>
+    <string name="tingkat_kepercayaan">Confidence Score</string>
+    <string name="kamuBisa">You can take picture\nfrom camera or gallery</string>
+    <string name="button_languange">Languange</string>
 </resources>
