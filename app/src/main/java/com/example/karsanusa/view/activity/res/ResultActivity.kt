@@ -1,13 +1,19 @@
 package com.example.karsanusa.view.activity.res
 
-import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.karsanusa.data.remote.response.ListPredictionsItem
+import com.example.karsanusa.data.remote.response.ModelResponse
 import com.example.karsanusa.databinding.ActivityResultBinding
+import com.example.karsanusa.view.adapter.ResultAdapter
+import com.example.karsanusa.view.listener.ResultListener
 
-class ResultActivity : AppCompatActivity() {
+class ResultActivity : AppCompatActivity(), ResultListener {
     private lateinit var binding: ActivityResultBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,26 +22,35 @@ class ResultActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Ambil data dari Intent
-        val imageUri = intent.getStringExtra(EXTRA_IMAGE_URI)?.let { Uri.parse(it) }
-        val result = intent.getStringExtra(EXTRA_RESULT)
-
-        // Tampilkan gambar
-        if (imageUri != null) {
-            Log.d("ResultActivity", "Image URI: $imageUri")
-            binding.resultSnapshot.setImageURI(imageUri)
-        } else {
-            Log.e("ResultActivity", "Image URI is null")
-            showToast("Failed to load image")
+        val extraResponse: ModelResponse?
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            extraResponse = intent.getParcelableExtra(EXTRA_RESPONSE, ModelResponse::class.java)
+        }
+        else {
+            extraResponse = intent.getParcelableExtra<ModelResponse>(EXTRA_RESPONSE)
         }
 
-        // Tampilkan hasil deteksi
-        if (result != null) {
-            Log.d("ResultActivity", "Detection Result: $result")
-            binding.resultText.text = result
-        } else {
-            Log.e("ResultActivity", "Result text is null")
-            showToast("No detection result available")
+        val adapter = ResultAdapter(this)
+        val recyclerView = binding.resultRecyclerView
+
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
+
+        // Submit dengan urutan paramter confidence yang terbesar ke terkecil
+        if (extraResponse != null) {
+            adapter.submitList(extraResponse.listPredictions.sortedByDescending { it.confidence })
         }
+        else {
+            Log.d("ResultActivity", "${EXTRA_RESPONSE} is null")
+        }
+    }
+
+    override fun onItemClick(view: View, item: ListPredictionsItem) {
+        // Handle ketika recycler view item diklik di sini. Contoh:
+        showToast(item.identifier)
+
+        // Nah, tinggal request ke api detail batik lagi, kan ga ada url item nya dikasih nih.
+        // Kalo mau gampang tinggal minta ke cc diubah dikit wkwkk biar tinggal intent uri di sini
     }
 
     private fun showToast(message: String) {
@@ -43,7 +58,6 @@ class ResultActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val EXTRA_IMAGE_URI = "extra_image_uri"
-        const val EXTRA_RESULT = "extra_result"
+        const val EXTRA_RESPONSE = "extra_response"
     }
 }
