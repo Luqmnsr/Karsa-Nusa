@@ -44,8 +44,7 @@
                     android:layout_height="100dp"
                     android:contentDescription="@string/content_description_fragment_profile_image"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/a"
-                    tools:src="@tools:sample/avatars" />
+                    android:src="@drawable/img_logo" />
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -55,7 +54,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/hint_username"
+                android:text="@string/karsa_nusa"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="20sp"
+                android:textColor="@color/text_primary"
+                android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/profile_image_container2"
                 app:layout_constraintTop_toTopOf="@+id/profile_image_container2" />
@@ -66,7 +69,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/hint_email"
+                android:text="@string/profileName"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="16sp"
+                android:textColor="@color/text_primary"
+                android:gravity="center"
                 app:layout_constraintEnd_toEndOf="@+id/profile_username"
                 app:layout_constraintStart_toStartOf="@+id/profile_username"
                 app:layout_constraintTop_toBottomOf="@+id/profile_username" />
