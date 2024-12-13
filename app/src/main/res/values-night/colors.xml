@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="navy">#1A1A1A</color>
+    <color name="button">#A88C70</color>
+
+    <!--Title Auth-->
+    <color name="title_register">#E1B865</color>
+
+    <!--Message Auth-->
+    <color name="message_register">#A6D5C2</color>
+
+    <!-- Background Auth -->
+    <color name="backgdround_auth">#121212</color>
+    <color name="welcome">#252525</color>
+
+    <!-- Button Auth -->
+    <color name="button_auth_500">#A88C70</color>
+    <color name="button_auth_200">#D1B5A0</color>
+
+    <!-- Text Auth -->
+    <color name="hypertext_auth_500">#FF7B62</color>
+    <color name="hypertext_auth_200">#F5C6C4</color>
+    <color name="text_primary">#FFFFFF</color>
+
+    <!-- Home -->
+    <color name="background_main">#1F1F1F</color>
+
+    <!-- Read More -->
+    <color name="read_more">#FFC966</color>
+</resources>
