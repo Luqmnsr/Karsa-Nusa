@@ -1,6 +1,6 @@
 package com.example.karsanusa.data.remote.retrofit
 
-import com.example.karsanusa.data.remote.response.DetailModelResponse
+import com.example.karsanusa.data.remote.response.DetailResponse
 import com.example.karsanusa.data.remote.response.ModelResponse
 import okhttp3.MultipartBody
 import retrofit2.http.GET
@@ -19,5 +19,5 @@ interface ApiServiceModel {
     @GET("details/{batikIdentifier}")
     suspend fun getBatikDetails(
         @Path("batikIdentifier") batikIdentifier: String
-    ): DetailModelResponse
+    ): DetailResponse
 }
