@@ -188,6 +188,7 @@ class BatikActivity : AppCompatActivity() {
     private fun moveToResult(extraResponse: ModelResponse) {
         val intent = Intent(this, ResultActivity::class.java).apply {
             putExtra(ResultActivity.EXTRA_RESPONSE, extraResponse)
+            putExtra(ResultActivity.EXTRA_IMAGE_URI, currentImageUri.toString())
         }
         startActivity(intent)
     }

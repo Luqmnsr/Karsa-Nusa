@@ -42,7 +42,7 @@ class ModelRepository private constructor(
         emit(Result.Loading)
 
         try {
-            val response = apiServiceModel.getBatikDetails(batikIdentifier).detailResponse
+            val response = apiServiceModel.getBatikDetails(batikIdentifier)
             emit(Result.Success(response))
         } catch (e: IOException) {
             emit(Result.Error("No internet connection"))
